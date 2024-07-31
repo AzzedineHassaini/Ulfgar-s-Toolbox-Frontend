@@ -1,6 +1,6 @@
-import {Component, OnInit, ViewEncapsulation} from '@angular/core';
+import {Component, ViewEncapsulation} from '@angular/core';
 import {MenuItem, PrimeIcons} from "primeng/api";
-import {IAuth, UserRole} from "../../../features/auth/models/auth";
+import {IAuth} from "../../../features/auth/models/auth";
 import {toSignal} from "@angular/core/rxjs-interop";
 import {AuthService} from "../../../features/auth/services/auth.service";
 import {Router, RouterLink} from "@angular/router";
@@ -23,7 +23,7 @@ import {MenubarModule} from "primeng/menubar";
 })
 export class HeaderComponent{
 
-  callBackLogout = (event: any) => {
+  callBackLogout = () => {
     this.handleLogout();
   };
 
