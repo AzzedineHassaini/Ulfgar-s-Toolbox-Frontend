@@ -9,7 +9,6 @@ import {LOGIN_FORM} from "../../form/login.form";
 import {Router} from "@angular/router";
 import {AuthService} from "../../services/auth.service";
 import {MessagesModule} from "primeng/messages";
-import {Message} from "primeng/api";
 import {NgIf} from "@angular/common";
 
 @Component({
@@ -46,7 +45,7 @@ export class LoginComponent {
     if (this.form.valid) {
       this.serverError = ''; // Réinitialiser le message d'erreur côté serveur
       this._auth.login(this.form.value).subscribe({
-        next: (auth) => {
+        next: () => {
           console.log(this._auth.currentUser);
           this._router.navigate(['home']);
         },
