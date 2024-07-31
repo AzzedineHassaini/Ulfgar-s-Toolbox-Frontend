@@ -1,5 +1,5 @@
 import {Validators} from "@angular/forms";
-import {StrongPasswordRegx} from "../../../shared/const";
+import {StrongPasswordRegx} from "../../../shared/const/const";
 
 export interface IRegisterForm {
   mail: string,
