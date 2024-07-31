@@ -6,7 +6,7 @@
 }
 
 .footer-content {
-  max-width: 1200px;
+  max-width: 100%;
   margin: 0 auto;
   padding: 0 20px;
   display: flex;
@@ -14,8 +14,14 @@
   align-items: center;
 }
 
-.footer-contact, .footer-copyright {
+.footer-contact {
   font-size: 14px;
+  margin-right: auto;
+}
+
+.footer-copyright {
+  font-size: 14px;
+  margin-left: auto;
 }
 
 /* Responsive design */
