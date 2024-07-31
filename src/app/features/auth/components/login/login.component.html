@@ -1,1 +1,29 @@
-<p>login works!</p>
+<div class="card flex flex-column md:flex-row gap-3">
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <p-inputGroup>
+      <p-inputGroupAddon>
+        <i class="pi pi-user"></i>
+      </p-inputGroupAddon>
+      <input pInputText placeholder="E-mail" type="email" id="in-email" formControlName="email"/>
+    </p-inputGroup>
+
+    <p-inputGroup>
+      <p-inputGroupAddon>
+        <i class="pi pi-key"></i>
+      </p-inputGroupAddon>
+      <input type="password" pPassword id="in-password" formControlName="password" placeholder="Mot de passe" [feedback]="false">
+    </p-inputGroup>
+
+    <div class="error-container">
+      @if (getErrorMessage()){
+        <small class="p-error">
+          {{ getErrorMessage() }}
+        </small>
+      }
+    </div>
+
+    <div>
+      <p-button type="submit" label="Connexion" [disabled]="form.invalid" />
+    </div>
+  </form>
+</div>

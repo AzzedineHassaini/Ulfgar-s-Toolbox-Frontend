@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import {BehaviorSubject, catchError, map, Observable, of, tap} from 'rxjs';
+import {BehaviorSubject, catchError, map, Observable, tap, throwError} from 'rxjs';
 import {IAuth} from "../models/auth";
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpErrorResponse} from "@angular/common/http";
 import {CookieService} from "ngx-cookie-service";
 import {env} from "../../../../env/env";
 import {ILoginForm} from "../form/login.form";
@@ -48,15 +48,25 @@ export class AuthService {
     return this.currentUser ? this.currentUser.accessToken : null
   }
 
-  login(form: ILoginForm) {
-    return this._client.post<IAuth>(env.baseUrl + 'auth/login', form).pipe(
+  login(form: ILoginForm): Observable<IAuth> {
+    return this._client.post<IAuth>(`${env.baseUrl}auth/login`, form).pipe(
       tap((auth) => {
         this.currentUser = auth;
       }),
-      catchError(() => {
-        return of(null);
-      })
+      catchError(this.handleError)
     );
+  }
+
+  private handleError(error: HttpErrorResponse) {
+    let errorMessage = 'Une erreur inconnue s\'est produite';
+    if (error.error instanceof ErrorEvent) {
+      // Erreur côté client
+      errorMessage = `Erreur: ${error.error.message}`;
+    } else {
+      // Erreur côté serveur
+      errorMessage = error.error;
+    }
+    return throwError(() => new Error(errorMessage));
   }
 
   register(form: IRegisterForm, role: string, login: boolean = true){
