@@ -1,14 +1,32 @@
-:host {
-  display: block;
+.page-container {
+  display: flex;
+  justify-content: center;
+  min-height: 100%;
+  padding: 2rem;
+  background-color: #f5f5f5;
 }
 
-.card {
-  max-width: 400px;
-  margin: 2rem auto;
+.content-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 2rem;
+  width: 100%;
+  max-width: 800px;
+}
+
+.form-container {
+  flex: 0 0 400px;
   padding: 2rem;
   background-color: #ffffff;
   border-radius: 8px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.error-wrapper {
+  flex: 1;
+  min-width: 200px;
+  max-width: 300px;
 }
 
 form {
@@ -21,46 +39,66 @@ form {
   display: flex;
   flex-direction: column;
   margin-bottom: 1rem;
-}
-
-.p-inputgroup {
-  margin-bottom: 0.25rem;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-}
-
-.p-inputtext {
-  width: 100%;
-  padding: 0.75rem;
-}
-
-.p-inputgroup-addon {
-  background-color: #f4f4f4;
-  border: none;
-  color: #666;
-}
-
-.p-password {
   width: 100%;
 }
 
-.p-button {
+.p-float-label {
   width: 100%;
-  margin-top: 1rem;
-}
-
-@media (max-width: 640px) {
-  .card {
-    margin: 1rem;
-    padding: 1.5rem;
+  display: block;
+  #email {
+    width: 100%;
   }
 }
 
-.error-container {
-  min-height: 0.5rem;
-  margin: 0.2rem 0;
+:host ::ng-deep {
+  .p-inputtext,
+  .p-password,
+  .p-password-input,
+  input[type="text"],
+  input[type="password"] {
+    width: 100% !important;
+    box-sizing: border-box !important;
+    min-width: 0 !important;
+  }
+
+  .p-input-icon-right {
+    width: 100%;
+    display: block;
+
+    > .p-inputtext {
+      width: 100% !important;
+    }
+  }
+
+  .p-password {
+    display: flex;
+    width: 100% !important;
+
+    input {
+      flex: 1;
+      width: 100% !important;
+    }
+  }
+
+  .p-button {
+    width: 100%;
+    margin-top: 1rem;
+  }
 }
 
-.p-error {
-  font-size: 1rem;
-  color: #f44336;
+@media (max-width: 768px) {
+  .content-wrapper {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .form-container,
+  .error-wrapper {
+    width: 100%;
+    max-width: 400px;
+  }
+
+  .error-wrapper {
+    margin-top: 1rem;
+  }
 }

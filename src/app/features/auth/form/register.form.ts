@@ -2,13 +2,13 @@ import {Validators} from "@angular/forms";
 import {StrongPasswordRegx} from "../../../shared/const/const";
 
 export interface IRegisterForm {
-  mail: string,
+  email: string,
   password: string,
   pseudo: string
 }
 
 export const REGISTER_FORM = {
-  'mail': [ '', [Validators.required, Validators.email] ],
+  'email': [ '', [Validators.required, Validators.email] ],
   'password': [ '', [Validators.required, Validators.pattern(StrongPasswordRegx)] ],
   'pseudo': [ '', [Validators.required] ],
 }

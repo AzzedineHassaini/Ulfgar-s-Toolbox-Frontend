@@ -9,7 +9,8 @@ import {LOGIN_FORM} from "../../form/login.form";
 import {Router} from "@angular/router";
 import {AuthService} from "../../services/auth.service";
 import {MessagesModule} from "primeng/messages";
-import {NgIf} from "@angular/common";
+import {NgClass, NgIf} from "@angular/common";
+import {ErrorComponent} from "../../../../shared/components/error/error.component";
 
 @Component({
   selector: 'app-login',
@@ -22,7 +23,9 @@ import {NgIf} from "@angular/common";
     PasswordModule,
     InputTextModule,
     MessagesModule,
-    NgIf
+    NgIf,
+    ErrorComponent,
+    NgClass
   ],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss',
@@ -46,7 +49,6 @@ export class LoginComponent {
       this.serverError = ''; // Réinitialiser le message d'erreur côté serveur
       this._auth.login(this.form.value).subscribe({
         next: () => {
-          console.log(this._auth.currentUser);
           this._router.navigate(['home']);
         },
         error: (error: Error) => {
@@ -57,6 +59,8 @@ export class LoginComponent {
           // Logique à exécuter lors de la complétion (si nécessaire)
         }
       });
+    } else {
+      this.form.markAllAsTouched();
     }
   }
 
@@ -85,7 +89,12 @@ export class LoginComponent {
       errorMessages.push(this.serverError);
     }
 
-    return errorMessages.join(' ');
+    return errorMessages.join('. ');
+  }
+
+  isFieldInvalid(fieldName: string): boolean {
+    const control = this.form.get(fieldName);
+    return !!control && control.invalid && (control.dirty || control.touched);
   }
 
 }

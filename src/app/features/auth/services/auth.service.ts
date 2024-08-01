@@ -64,19 +64,25 @@ export class AuthService {
       errorMessage = `Erreur: ${error.error.message}`;
     } else {
       // Erreur côté serveur
-      errorMessage = error.error;
+      if (typeof error.error === 'string') {
+        errorMessage = error.error;
+      } else if (error.error && typeof error.error.message === 'string') {
+        errorMessage = error.error.message;
+      } else {
+        errorMessage = `Erreur ${error.status}: ${error.statusText}`;
+      }
     }
     return throwError(() => new Error(errorMessage));
   }
 
-  register(form: IRegisterForm, role: string, login: boolean = true){
+  register(form: IRegisterForm, role: string, login: boolean = true) : Observable<IAuth>{
     return this._client.post<IAuth>(env.baseUrl + 'auth/register', form).pipe(
-      tap((auth) =>
-      {
+      tap((auth) => {
         if (login) {
           this.currentUser = auth
         }
-      })
+      }),
+      catchError(this.handleError)
     )
   }
 
