@@ -1,0 +1,104 @@
+.page-container {
+  display: flex;
+  justify-content: center;
+  min-height: 100%;
+  padding: 2rem;
+  background-color: #f5f5f5;
+}
+
+.content-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 2rem;
+  width: 100%;
+  max-width: 800px;
+}
+
+.form-container {
+  flex: 0 0 400px;
+  padding: 2rem;
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.error-wrapper {
+  flex: 1;
+  min-width: 200px;
+  max-width: 300px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.input-container {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1rem;
+  width: 100%;
+}
+
+.p-float-label {
+  width: 100%;
+  display: block;
+  #email {
+    width: 100%;
+  }
+}
+
+:host ::ng-deep {
+  .p-inputtext,
+  .p-password,
+  .p-password-input,
+  input[type="text"],
+  input[type="password"] {
+    width: 100% !important;
+    box-sizing: border-box !important;
+    min-width: 0 !important;
+  }
+
+  .p-input-icon-right {
+    width: 100%;
+    display: block;
+
+    > .p-inputtext {
+      width: 100% !important;
+    }
+  }
+
+  .p-password {
+    display: flex;
+    width: 100% !important;
+
+    input {
+      flex: 1;
+      width: 100% !important;
+    }
+  }
+
+  .p-button {
+    width: 100%;
+    margin-top: 1rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .content-wrapper {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .form-container,
+  .error-wrapper {
+    width: 100%;
+    max-width: 400px;
+  }
+
+  .error-wrapper {
+    margin-top: 1rem;
+  }
+}

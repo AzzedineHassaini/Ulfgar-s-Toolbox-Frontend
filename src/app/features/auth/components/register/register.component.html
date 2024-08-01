@@ -1,0 +1,45 @@
+<div class="page-container">
+  <div class="content-wrapper">
+    <div class="form-container">
+      <form [formGroup]="form" (ngSubmit)="onSubmit()">
+        <div class="input-container">
+          <span class="p-float-label">
+            <input id="email" type="text" pInputText formControlName="email" [ngClass]="{'ng-invalid ng-dirty': isFieldInvalid('email')}">
+            <label for="email">Email</label>
+          </span>
+        </div>
+
+        <div class="input-container">
+          <span class="p-float-label">
+            <input id="pseudo" type="text" pInputText formControlName="pseudo" [ngClass]="{'ng-invalid ng-dirty': isFieldInvalid('pseudo')}">
+            <label for="pseudo">Pseudo</label>
+          </span>
+        </div>
+
+        <div class="input-container">
+          <span class="p-float-label">
+            <p-password id="password" [toggleMask]="true" formControlName="password"
+                        [ngClass]="{'ng-invalid ng-dirty': isFieldInvalid('password')}"
+                        styleClass="w-full" [inputStyleClass]="'w-full'"></p-password>
+            <label for="password">Mot de passe</label>
+          </span>
+        </div>
+
+        <div class="input-container">
+          <span class="p-float-label">
+            <p-password id="confirmPassword" [toggleMask]="true" formControlName="confirmPassword"
+                        [ngClass]="{'ng-invalid ng-dirty': isFieldInvalid('confirmPassword')}"
+                        styleClass="w-full" [inputStyleClass]="'w-full'"></p-password>
+            <label for="confirmPassword">Confirmer le mot de passe</label>
+          </span>
+        </div>
+
+        <p-button type="submit" label="S'inscrire" styleClass="w-full"></p-button>
+      </form>
+    </div>
+
+    <div class="error-wrapper">
+      <app-error [errorMessage]="getErrorMessage()"></app-error>
+    </div>
+  </div>
+</div>
