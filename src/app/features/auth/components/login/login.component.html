@@ -1,24 +1,23 @@
 <div class="page-container">
   <div class="content-wrapper">
     <div class="form-container">
+      <h2>Connexion à l'Atelier</h2>
       <form [formGroup]="form" (ngSubmit)="onSubmit()">
         <div class="input-container">
           <span class="p-float-label">
-            <input id="email" type="text" pInputText formControlName="email" [ngClass]="{'ng-invalid ng-dirty': isFieldInvalid('email')}">
+            <input id="email" type="text" pInputText formControlName="email" class="custom-input" [ngClass]="{'ng-invalid ng-dirty': isFieldInvalid('email')}">
             <label for="email">Email</label>
           </span>
         </div>
 
         <div class="input-container">
           <span class="p-float-label">
-            <p-password id="password" [toggleMask]="true" formControlName="password"
-                        [ngClass]="{'ng-invalid ng-dirty': isFieldInvalid('password')}"
-                        styleClass="w-full" [inputStyleClass]="'w-full'"></p-password>
+            <p-password id="password" formControlName="password" [toggleMask]="true" [feedback]="false" styleClass="custom-password" [inputStyleClass]="'custom-input'" [ngClass]="{'ng-invalid ng-dirty': isFieldInvalid('password')}"></p-password>
             <label for="password">Mot de passe</label>
           </span>
         </div>
 
-        <p-button type="submit" label="Se connecter" styleClass="w-full"></p-button>
+        <p-button type="submit" label="Se connecter" styleClass="custom-button"></p-button>
       </form>
     </div>
 

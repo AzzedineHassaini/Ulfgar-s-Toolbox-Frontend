@@ -1,9 +1,11 @@
 export interface IAuth {
-  id: number,
-  email: string,
-  pseudo: string,
-  role: UserRole,
-  accessToken: string
+  accessToken: string,
+  user:{
+    id: number,
+    email: string,
+    pseudo: string,
+    role: UserRole,
+  }
 }
 
 export enum UserRole {

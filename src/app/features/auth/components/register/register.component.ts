@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators, AbstractControl, ValidatorFn } from "@angular/forms";
 import { InputGroupModule } from "primeng/inputgroup";
 import { InputGroupAddonModule } from "primeng/inputgroupaddon";
-import { Button } from "primeng/button";
+import {Button, ButtonDirective} from "primeng/button";
 import { PasswordModule } from "primeng/password";
 import { InputTextModule } from "primeng/inputtext";
 import { REGISTER_FORM } from "../../form/register.form";
@@ -24,7 +24,8 @@ import {ErrorComponent} from "../../../../shared/components/error/error.componen
     NgIf,
     NgClass,
     ErrorComponent,
-    ErrorComponent
+    ErrorComponent,
+    ButtonDirective
   ],
   templateUrl: './register.component.html',
   styleUrl: './register.component.scss'

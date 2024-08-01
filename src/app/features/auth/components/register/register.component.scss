@@ -1,9 +1,21 @@
+@import url('https://fonts.googleapis.com/css2?family=MedievalSharp&family=Roboto+Slab:wght@400;700&display=swap');
+
+:root {
+  --primary-color: #8B4513;  // Brun
+  --secondary-color: #DAA520; // Or
+  --background-color: #F5E6D3; // Parchemin clair
+  --text-color: #2C1B0E; // Brun foncé
+}
+
 .page-container {
   display: flex;
   justify-content: center;
+  align-items: center;
   min-height: 100%;
+  background-color: var(--background-color);
+  background-image: url('/assets/stone-texture.jpg');
+  background-size: cover;
   padding: 2rem;
-  background-color: #f5f5f5;
 }
 
 .content-wrapper {
@@ -18,9 +30,10 @@
 .form-container {
   flex: 0 0 400px;
   padding: 2rem;
-  background-color: #ffffff;
+  background-color: rgba(255, 255, 255, 0.9);
   border-radius: 8px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 0 15px rgba(218, 165, 32, 0.3);
+  border: 2px solid var(--secondary-color);
 }
 
 .error-wrapper {
@@ -50,12 +63,35 @@ form {
   .p-password,
   .p-password-input {
     width: 100%;
+    background-color: rgba(245, 230, 211, 0.9);
+    border: 1px solid var(--primary-color);
+    color: var(--text-color);
+    font-family: 'Roboto Slab', serif;
   }
 
   .p-button {
     width: 100%;
     margin-top: 1rem;
+    background-color: var(--primary-color);
+    border-color: var(--secondary-color);
+    font-family: 'MedievalSharp', cursive;
+    font-size: 1.1rem;
+    transition: all 0.3s ease;
+
+    &:hover {
+      background-color: var(--secondary-color);
+      border-color: var(--primary-color);
+    }
   }
+}
+
+h2 {
+  font-family: 'MedievalSharp', cursive;
+  color: var(--primary-color);
+  text-align: center;
+  margin-bottom: 1.5rem;
+  font-size: 2rem;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
 }
 
 @media (max-width: 768px) {
