@@ -1,6 +1,7 @@
 <div class="page-container">
   <div class="content-wrapper">
     <div class="form-container">
+      <h2>Rejoindre l'Atelier</h2>
       <form [formGroup]="form" (ngSubmit)="onSubmit()">
         <div class="input-container">
           <span class="p-float-label">
@@ -18,23 +19,19 @@
 
         <div class="input-container">
           <span class="p-float-label">
-            <p-password id="password" [toggleMask]="true" formControlName="password"
-                        [ngClass]="{'ng-invalid ng-dirty': isFieldInvalid('password')}"
-                        styleClass="w-full" [inputStyleClass]="'w-full'"></p-password>
+            <p-password id="password" formControlName="password" [toggleMask]="true" [ngClass]="{'ng-invalid ng-dirty': isFieldInvalid('password')}"></p-password>
             <label for="password">Mot de passe</label>
           </span>
         </div>
 
         <div class="input-container">
           <span class="p-float-label">
-            <p-password id="confirmPassword" [toggleMask]="true" formControlName="confirmPassword"
-                        [ngClass]="{'ng-invalid ng-dirty': isFieldInvalid('confirmPassword')}"
-                        styleClass="w-full" [inputStyleClass]="'w-full'"></p-password>
+            <p-password id="confirmPassword" formControlName="confirmPassword" [toggleMask]="true" [ngClass]="{'ng-invalid ng-dirty': isFieldInvalid('confirmPassword')}"></p-password>
             <label for="confirmPassword">Confirmer le mot de passe</label>
           </span>
         </div>
 
-        <p-button type="submit" label="S'inscrire" styleClass="w-full"></p-button>
+        <button pButton type="submit" label="S'inscrire"></button>
       </form>
     </div>
 

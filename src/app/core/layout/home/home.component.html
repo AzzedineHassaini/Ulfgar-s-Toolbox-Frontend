@@ -1,1 +1,19 @@
-<p>home works!</p>
+<div class="home-container">
+  <section class="hero">
+    <div class="hero-content">
+      <h1>💎 L'Atelier d'Ulfgar 🛠️️</h1>
+      <p>Votre coffre à outils ultime : grimoires magiques, création de personnage, générateur de trésors, ...</p>
+    </div>
+  </section>
+
+  <section class="features">
+    <h2>Les Outils de l'Atelier</h2>
+    <div class="feature-grid">
+      <div class="feature-item" *ngFor="let feature of features">
+        <i class="{{feature.icon}} feature-icon"></i>
+        <h3>{{feature.title}}</h3>
+        <p>{{feature.description}}</p>
+      </div>
+    </div>
+  </section>
+</div>

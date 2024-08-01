@@ -1,7 +1,15 @@
-<header class="menu-header">
-  <p-menubar [model]="leftItems">
-    <ng-template pTemplate="end">
-      <p-menubar [model]="rightItems" class="right-items"></p-menubar>
-    </ng-template>
-  </p-menubar>
-</header>
+<div class="header-container">
+  <div class="mobile-menu">
+    <p-menubar [model]="leftItems" [styleClass]="'full-width'">
+      <div class="right-menu">
+        @if (isMobileView) {
+          <p-menu #menu [popup]="true" [model]="rightItems"></p-menu>
+          <button pButton type="button" icon="pi pi-user" (click)="menu.toggle($event)"></button>
+        } @else {
+          <p-menubar [model]="rightItems"></p-menubar>
+        }
+      </div>
+    </p-menubar>
+  </div>
+
+</div>

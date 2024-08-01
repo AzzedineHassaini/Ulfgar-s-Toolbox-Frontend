@@ -2,7 +2,7 @@ import {Component, ViewEncapsulation} from '@angular/core';
 import {FormBuilder, FormGroup, ReactiveFormsModule} from "@angular/forms";
 import {InputGroupModule} from "primeng/inputgroup";
 import {InputGroupAddonModule} from "primeng/inputgroupaddon";
-import {Button} from "primeng/button";
+import {Button, ButtonDirective, ButtonModule} from "primeng/button";
 import {PasswordModule} from "primeng/password";
 import {InputTextModule} from "primeng/inputtext";
 import {LOGIN_FORM} from "../../form/login.form";
@@ -25,7 +25,9 @@ import {ErrorComponent} from "../../../../shared/components/error/error.componen
     MessagesModule,
     NgIf,
     ErrorComponent,
-    NgClass
+    NgClass,
+    ButtonDirective,
+    ButtonModule
   ],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss',

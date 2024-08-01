@@ -1,4 +1,21 @@
 /* Styles pour la mise en page globale */
+
+:root {
+  --primary-color: #8B4513;  // Brun
+  --secondary-color: #DAA520; // Or
+  --background-color: #F5E6D3; // Parchemin clair
+  --text-color: #2C1B0E; // Brun foncé
+}
+
+body, html {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  background-color: var(--background-color);
+  color: var(--text-color);
+  font-family: 'Roboto Slab', serif;
+}
+
 html, body {
   height: 100%;
   margin: 0;

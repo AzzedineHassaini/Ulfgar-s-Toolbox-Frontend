@@ -1,0 +1,139 @@
+@import url('https://fonts.googleapis.com/css2?family=MedievalSharp&family=Roboto+Slab:wght@400;700&display=swap');
+
+:root {
+  --primary-color: #8B4513;  // Brun
+  --secondary-color: #DAA520; // Or
+  --background-color: #F5E6D3; // Parchemin clair
+  --text-color: #2C1B0E; // Brun foncé
+}
+
+body, html {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  background-color: var(--background-color);
+  color: var(--text-color);
+  font-family: 'Roboto Slab', serif;
+}
+
+app-root {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+app-header, app-footer {
+  flex-shrink: 0;
+}
+
+.home-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+  overflow: hidden;
+}
+
+.hero {
+  background-image: url('/assets/stone-texture.jpg');
+  background-size: cover;
+  color: var(--text-color);
+  padding: 2rem;
+  border-radius: 10px;
+  text-align: center;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+  flex: 0 0 auto;
+
+  h1 {
+    font-family: 'MedievalSharp', cursive;
+    font-size: 3.2rem;
+    margin-bottom: 1rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    color: #FFD700; // Or pour un aspect précieux
+    letter-spacing: 2px;
+  }
+
+  p {
+    font-size: 1.2rem;
+    line-height: 1.6;
+    margin-bottom: 1rem;
+    color: #eae283; // Lavande clair pour un contraste sur fond sombre
+    max-width: 800px; // Limiter la largeur pour une meilleure lisibilité
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0 1rem;
+  }
+}
+
+.features {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 2rem 0;
+
+  h2 {
+    font-family: 'MedievalSharp', cursive;
+    text-align: center;
+    margin-bottom: 2rem;
+    color: var(--primary-color);
+  }
+
+  .feature-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    align-items: start;
+  }
+
+  .feature-item {
+    text-align: center;
+    padding: 1.5rem;
+    background-color: #FFF9E6; // Parchemin plus clair
+    border-radius: 8px;
+    transition: transform 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border: 2px solid var(--primary-color);
+
+    &:hover {
+      transform: translateY(-5px);
+    }
+
+    .feature-icon {
+      font-size: 2rem;
+      color: var(--secondary-color);
+      margin-bottom: 1rem;
+    }
+
+    h3 {
+      font-family: 'MedievalSharp', cursive;
+      margin-bottom: 0.5rem;
+      color: var(--primary-color);
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .hero {
+    h1 {
+      font-size: 2.5rem;
+    }
+    p {
+      font-size: 1rem;
+    }
+  }
+}
+
+.hero h1 {
+  color: #FFD700;
+  text-shadow: 0 0 5px rgba(255, 215, 0, 0.5);
+  animation: subtleSparkle 3s ease-in-out infinite;
+}
+
+@keyframes subtleSparkle {
+  0%, 100% { text-shadow: 0 0 5px rgba(255, 215, 0, 0.5); }
+  50% { text-shadow: 0 0 8px rgba(255, 215, 0, 0.8), 0 0 12px rgba(255, 215, 0, 0.3); }
+}
