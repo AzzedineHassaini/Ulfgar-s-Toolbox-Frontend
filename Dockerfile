@@ -12,7 +12,7 @@ RUN npm run build:prod
 
 FROM nginx:alpine AS deploy
 
-COPY --from=build /app/dist/dnd-app/browser /usr/share/nginx/html
+COPY --from=build /app/dist/ulfgar-s-toolbox-frontend/browser /usr/share/nginx/html
 
 COPY /nginx.conf /etc/nginx/conf.d/default.conf
 
