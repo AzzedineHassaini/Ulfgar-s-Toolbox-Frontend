@@ -50,7 +50,8 @@ export class AuthService {
 
   login(form: ILoginForm): Observable<IAuth> {
     console.log('API URL:', environment.apiUrl);
-    return this._client.post<IAuth>(`${environment.apiUrl}auth/login`, form).pipe(
+    // return this._client.post<IAuth>(`${environment.apiUrl}auth/login`, form).pipe(
+    return this._client.post<IAuth>(`http://e00cswo.162.55.190.157.sslip.io/auth/login`, form).pipe(
       tap((auth) => {
         this.currentUser = auth;
       }),
