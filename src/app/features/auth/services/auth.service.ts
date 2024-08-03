@@ -5,7 +5,7 @@ import {HttpClient, HttpErrorResponse} from "@angular/common/http";
 import {CookieService} from "ngx-cookie-service";
 import {ILoginForm} from "../form/login.form";
 import {IRegisterForm} from "../form/register.form";
-import { environment } from '../../../../env/environment';
+import { environment } from '../../../../environments/environment';
 
 
 const apiUrl = environment.apiUrl;
