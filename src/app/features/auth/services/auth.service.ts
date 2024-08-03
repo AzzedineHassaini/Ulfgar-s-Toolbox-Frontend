@@ -3,9 +3,12 @@ import {BehaviorSubject, catchError, map, Observable, tap, throwError} from 'rxj
 import {IAuth} from "../models/auth";
 import {HttpClient, HttpErrorResponse} from "@angular/common/http";
 import {CookieService} from "ngx-cookie-service";
-import {env} from "../../../../env/env";
 import {ILoginForm} from "../form/login.form";
 import {IRegisterForm} from "../form/register.form";
+import { environment } from '../../../../env/environment';
+
+
+const apiUrl = environment.apiUrl;
 
 @Injectable({
   providedIn: 'root'
@@ -49,7 +52,7 @@ export class AuthService {
   }
 
   login(form: ILoginForm): Observable<IAuth> {
-    return this._client.post<IAuth>(`${env.baseUrl}auth/login`, form).pipe(
+    return this._client.post<IAuth>(`${apiUrl}auth/login`, form).pipe(
       tap((auth) => {
         this.currentUser = auth;
       }),
@@ -76,7 +79,7 @@ export class AuthService {
   }
 
   register(form: IRegisterForm, role: string, login: boolean = true) : Observable<IAuth>{
-    return this._client.post<IAuth>(env.baseUrl + 'auth/register', form).pipe(
+    return this._client.post<IAuth>(apiUrl + 'auth/register', form).pipe(
       tap((auth) => {
         if (login) {
           this.currentUser = auth
