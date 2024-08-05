@@ -5,10 +5,7 @@ import {HttpClient, HttpErrorResponse} from "@angular/common/http";
 import {CookieService} from "ngx-cookie-service";
 import {ILoginForm} from "../form/login.form";
 import {IRegisterForm} from "../form/register.form";
-import { environment } from '../../../../env/environment';
-
-
-const apiUrl = environment.apiUrl;
+import { environment } from '../../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -52,7 +49,8 @@ export class AuthService {
   }
 
   login(form: ILoginForm): Observable<IAuth> {
-    return this._client.post<IAuth>(`${apiUrl}auth/login`, form).pipe(
+    console.log('API URL:', environment.apiUrl);
+    return this._client.post<IAuth>(`${environment.apiUrl}/auth/login`, form).pipe(
       tap((auth) => {
         this.currentUser = auth;
       }),
@@ -79,7 +77,7 @@ export class AuthService {
   }
 
   register(form: IRegisterForm, role: string, login: boolean = true) : Observable<IAuth>{
-    return this._client.post<IAuth>(apiUrl + 'auth/register', form).pipe(
+    return this._client.post<IAuth>(environment.apiUrl + '/auth/register', form).pipe(
       tap((auth) => {
         if (login) {
           this.currentUser = auth
