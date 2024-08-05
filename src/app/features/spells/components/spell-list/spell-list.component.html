@@ -1,8 +1,78 @@
 <div class="card">
   <h2>Liste de sorts</h2>
 
-  <p-table [value]="spells" [lazy]="true" (onLazyLoad)="loadSpells($event)"
-           [paginator]="true" [rows]="20" [totalRecords]="totalRecords" [loading]="loading"
+  <p-button (onClick)="toggleFilter()" [label]="showFilter() ? 'Cacher les filtres' : 'Afficher les filtres'" styleClass="mb-3"></p-button>
+
+  <form *ngIf="showFilter()" [formGroup]="filterForm" (ngSubmit)="applyFilter()" class="mb-3">
+    <div class="grid">
+      <div class="col-12 md:col-3">
+            <span class="p-float-label">
+              <input id="name" type="text" pInputText formControlName="name">
+              <label for="name">Nom</label>
+            </span>
+      </div>
+      <div class="col-12 md:col-3">
+            <span class="p-float-label">
+              <p-dropdown id="class" [options]="classes()" formControlName="class" optionLabel="name" optionValue="id"></p-dropdown>
+              <label for="class">Classe</label>
+            </span>
+      </div>
+      <div class="col-12 md:col-3">
+            <span class="p-float-label">
+              <p-dropdown id="domain" [options]="domains()" formControlName="domain" optionLabel="name" optionValue="id"></p-dropdown>
+              <label for="domain">Domaine</label>
+            </span>
+      </div>
+      <div class="col-12 md:col-3">
+            <span class="p-float-label">
+              <input id="level" type="number" pInputText formControlName="level">
+              <label for="level">Niveau</label>
+            </span>
+      </div>
+      <div class="col-12 md:col-3">
+            <span class="p-float-label">
+              <input id="school" type="text" pInputText formControlName="school">
+              <label for="school">École</label>
+            </span>
+      </div>
+      <div class="col-12 md:col-3">
+            <span class="p-float-label">
+              <input id="description" type="text" pInputText formControlName="description">
+              <label for="description">Description</label>
+            </span>
+      </div>
+      <div class="col-12 md:col-3">
+            <span class="p-float-label">
+              <input id="effect" type="text" pInputText formControlName="effect">
+              <label for="effect">Effet</label>
+            </span>
+      </div>
+    </div>
+    <div class="grid mt-3">
+      <div class="col-12 md:col-2">
+        <p-checkbox formControlName="verbalComponents" label="Composante verbale"></p-checkbox>
+      </div>
+      <div class="col-12 md:col-2">
+        <p-checkbox formControlName="materialComponents" label="Composante matérielle"></p-checkbox>
+      </div>
+      <div class="col-12 md:col-2">
+        <p-checkbox formControlName="somaticComponents" label="Composante somatique"></p-checkbox>
+      </div>
+      <div class="col-12 md:col-2">
+        <p-checkbox formControlName="focusComponents" label="Composante focaliseur"></p-checkbox>
+      </div>
+      <div class="col-12 md:col-2">
+        <p-checkbox formControlName="experienceComponents" label="Composante XP"></p-checkbox>
+      </div>
+    </div>
+    <div class="mt-3">
+      <p-button type="submit" label="Appliquer les filtres"></p-button>
+      <p-button type="button" label="Réinitialiser" (onClick)="resetFilter()" styleClass="p-button-secondary ml-2"></p-button>
+    </div>
+  </form>
+
+  <p-table [value]="spells()" [lazy]="true" (onLazyLoad)="loadSpells($event)"
+           [paginator]="true" [rows]="20" [totalRecords]="totalRecords()" [loading]="loading()"
            [globalFilterFields]="['name','school','level']">
     <ng-template pTemplate="header">
       <tr>
@@ -23,7 +93,7 @@
         </td>
         <td>
           <p-button icon="pi pi-eye" (onClick)="viewDetails(spell.id)" styleClass="p-button-rounded p-button-text"></p-button>
-          @if (canEdit) {
+          @if (canEdit()) {
             <p-button icon="pi pi-pencil" (onClick)="editSpell(spell.id)" styleClass="p-button-rounded p-button-text p-button-warning"></p-button>
             <p-button icon="pi pi-trash" (onClick)="deleteSpell(spell.id)" styleClass="p-button-rounded p-button-text p-button-danger"></p-button>
           }
@@ -32,7 +102,7 @@
     </ng-template>
   </p-table>
 
-  @if (canEdit) {
+  @if (canEdit()) {
     <p-button label="Add New Spell" icon="pi pi-plus" styleClass="p-button-success" (onClick)="addNewSpell()"></p-button>
   }
 </div>
