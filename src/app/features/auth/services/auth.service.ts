@@ -50,7 +50,7 @@ export class AuthService {
 
   login(form: ILoginForm): Observable<IAuth> {
     console.log('API URL:', environment.apiUrl);
-    return this._client.post<IAuth>(`${environment.apiUrl}auth/login`, form).pipe(
+    return this._client.post<IAuth>(`${environment.apiUrl}/auth/login`, form).pipe(
       tap((auth) => {
         this.currentUser = auth;
       }),
@@ -77,7 +77,7 @@ export class AuthService {
   }
 
   register(form: IRegisterForm, role: string, login: boolean = true) : Observable<IAuth>{
-    return this._client.post<IAuth>(environment.apiUrl + 'auth/register', form).pipe(
+    return this._client.post<IAuth>(environment.apiUrl + '/auth/register', form).pipe(
       tap((auth) => {
         if (login) {
           this.currentUser = auth
