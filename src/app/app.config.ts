@@ -5,6 +5,7 @@ import { routes } from './app.routes';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import {provideHttpClient, withInterceptors} from "@angular/common/http";
 import {authInterceptor} from "./shared/interceptors/jwt.interceptor";
+import {ConfirmationService, MessageService} from "primeng/api";
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -14,5 +15,7 @@ export const appConfig: ApplicationConfig = {
     provideHttpClient( withInterceptors([
       authInterceptor
     ])),
+    MessageService,
+    ConfirmationService
   ]
 };
