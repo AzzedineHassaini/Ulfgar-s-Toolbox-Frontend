@@ -1,0 +1,41 @@
+<div class="card">
+  <h2>Spell List</h2>
+
+  <p-table [value]="spells" [lazy]="true" (onLazyLoad)="loadSpells($event)"
+           [paginator]="true" [rows]="20" [totalRecords]="totalRecords" [loading]="loading"
+           [globalFilterFields]="['name','school','level']">
+    <ng-template pTemplate="header">
+      <tr>
+        <th>Nom</th>
+        <th>École</th>
+        <th>Niveaux</th>
+        <th></th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-spell>
+      <tr>
+        <td>{{spell.name}}</td>
+        <td>{{spell.school}}</td>
+        <td>
+          <ng-container *ngFor="let level of spell.levels.split(';'); let last = last">
+            <p-chip [label]="level.replace(':',' ')" styleClass="mr-2" [removable]="false"></p-chip>
+          </ng-container>
+        </td>
+        <td>
+          <p-button icon="pi pi-eye" (onClick)="viewDetails(spell.id)" styleClass="p-button-rounded p-button-text"></p-button>
+          @if (canEdit) {
+            <p-button icon="pi pi-pencil" (onClick)="editSpell(spell.id)" styleClass="p-button-rounded p-button-text p-button-warning"></p-button>
+            <p-button icon="pi pi-trash" (onClick)="deleteSpell(spell.id)" styleClass="p-button-rounded p-button-text p-button-danger"></p-button>
+          }
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+
+  @if (canEdit) {
+    <p-button label="Add New Spell" icon="pi pi-plus" styleClass="p-button-success" (onClick)="addNewSpell()"></p-button>
+  }
+</div>
+
+<p-confirmDialog [style]="{width: '50vw'}"></p-confirmDialog>
+<p-toast></p-toast>
