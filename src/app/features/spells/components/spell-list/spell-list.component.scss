@@ -1,18 +1,92 @@
-:host ::ng-deep .p-datatable .p-datatable-thead > tr > th {
-  position: sticky;
-  top: 0;
-}
+:host {
+  // Styles existants pour le tableau
+  .p-datatable .p-datatable-thead > tr > th {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+  }
 
-.layout-news-active :host ::ng-deep .p-datatable tr > th {
-  top: 0;
-}
-
-@media screen and (max-width: 64em) {
-  :host ::ng-deep .p-datatable .p-datatable-thead > tr > th {
+  .layout-news-active .p-datatable tr > th {
     top: 0;
   }
 
-  .layout-news-active :host ::ng-deep .p-datatable tr > th {
-    top: 0;
+  @media screen and (max-width: 64em) {
+    .p-datatable .p-datatable-thead > tr > th {
+      top: 0;
+    }
+
+    .layout-news-active .p-datatable tr > th {
+      top: 0;
+    }
+  }
+
+  // Styles pour le titre et le bouton
+  h2 {
+    font-size: 1.5rem;
+    margin-right: 1rem;
+  }
+  ::ng-deep .p-button.p-button-link {
+    &:focus,
+    &:active,
+    &.p-focus {
+      box-shadow: none !important;
+    }
+
+    &:hover {
+      background-color: transparent !important;
+      text-decoration: underline;
+    }
+  }
+
+  // Styles pour p-multiselect et p-dropdown
+  p-multiselect, p-dropdown {
+    display: block;
+    width: 100%;
+
+    ::ng-deep {
+      .p-multiselect, .p-dropdown {
+        width: 100%;
+      }
+    }
+  }
+
+  // Styles pour les labels
+  label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+  }
+
+  .col-12 {
+    margin-bottom: 1rem;
+  }
+
+  // Styles pour le groupe de checkboxes
+  .flex.flex-wrap.gap-3 {
+    margin-top: 0.5rem;
+  }
+
+  .flex.align-items-center {
+    label {
+      margin-bottom: 0;
+      font-weight: normal;
+    }
+  }
+
+  // Style pour le cadre des filtres
+  ::ng-deep .p-card {
+    .p-card-body {
+      padding: 1rem;
+    }
+  }
+
+  .classChip ::ng-deep .p-chip {
+    background-color: #e6f3ff;
+    color: #0077be;
+  }
+
+  .domainChip ::ng-deep .p-chip {
+    background-color: #ffeecc;
+    color: #ff8c00;
   }
 }

@@ -1,0 +1,50 @@
+<div *ngIf="spellDetails" class="spell-details">
+  <h2>{{ spellDetails.name }}</h2>
+
+  <div class="spell-info">
+    <p><strong>École :</strong> {{ spellDetails.school }}
+      <span *ngIf="spellDetails.schoolComplement">({{ spellDetails.schoolComplement }})</span>
+    </p>
+    <p><strong>Temps d'incantation :</strong> {{ spellDetails.castingTime }}</p>
+    <p><strong>Portée :</strong> {{ spellDetails.range }}</p>
+    <p *ngIf="spellDetails.targets"><strong>Cibles :</strong> {{ spellDetails.targets }}</p>
+    <p *ngIf="spellDetails.effect"><strong>Effet :</strong> {{ spellDetails.effect }}</p>
+    <p *ngIf="spellDetails.duration"><strong>Durée :</strong> {{ spellDetails.duration }}</p>
+    <p *ngIf="spellDetails.savingThrow"><strong>Jet de sauvegarde :</strong> {{ spellDetails.savingThrow }}</p>
+    <p *ngIf="spellDetails.spellResistance"><strong>Résistance à la magie :</strong> {{ spellDetails.spellResistance }}</p>
+    <p *ngIf="spellDetails.components"><strong>Composantes :</strong> {{ spellDetails.components }}</p>
+  </div>
+
+  <div class="spell-description">
+    <h3>Description</h3>
+    <p>{{ spellDetails.description }}</p>
+  </div>
+
+  @if (spellDetails.classLevels){
+    <div class="spell-classes">
+      <h3>Classes</h3>
+      <p>@for (level of spellDetails.classLevels.split(';'); track $index) {
+        <p-chip class="classChip" [label]="level.replace(':', ' ')" styleClass="mr-2" [removable]="false"></p-chip>
+      }</p>
+    </div>
+  }
+
+  @if (spellDetails.domainLevels){
+    <div class="spell-domains">
+      <h3>Domaines</h3>
+      <p>@for (level of spellDetails.domainLevels.split(';'); track $index) {
+        <p-chip class="domainChip" [label]="level.replace(':', ' ')" styleClass="mr-2" [removable]="false"></p-chip>
+      }</p>
+    </div>
+  }
+
+  @if (spellDetails.bookName){
+    <div class="spell-source">
+      <h3>Source</h3>
+      <p>{{ spellDetails.bookName }} ({{ spellDetails.bookShortName }}), page {{ spellDetails.page }}</p>
+    </div>
+  }
+
+</div>
+
+<p *ngIf="!spellDetails">Chargement des détails du sort...</p>
