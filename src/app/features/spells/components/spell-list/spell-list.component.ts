@@ -7,33 +7,37 @@ import { UserRole } from "../../../auth/models/auth";
 import { toSignal } from "@angular/core/rxjs-interop";
 import { catchError, of, tap, BehaviorSubject } from "rxjs";
 import { TableLazyLoadEvent, TableModule } from "primeng/table";
-import { Button } from "primeng/button";
+import { ButtonModule } from "primeng/button";
 import { ConfirmDialogModule } from "primeng/confirmdialog";
 import { ToastModule } from "primeng/toast";
 import { ChipModule } from "primeng/chip";
-import { NgForOf, NgIf } from "@angular/common";
 import { CheckboxModule } from "primeng/checkbox";
 import { FormBuilder, FormGroup, ReactiveFormsModule } from "@angular/forms";
 import { InputTextModule } from "primeng/inputtext";
 import { DropdownModule } from "primeng/dropdown";
+import { MultiSelectModule } from "primeng/multiselect";
 import { CharacterClassService } from "../../../character-class/services/character-class.service";
 import { DomainService } from "../../../domain/services/domain.service";
+import {NgForOf} from "@angular/common";
+import {CardModule} from "primeng/card";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-spell-list',
   standalone: true,
   imports: [
     TableModule,
-    Button,
+    ButtonModule,
     ConfirmDialogModule,
     ToastModule,
     ChipModule,
-    NgForOf,
     CheckboxModule,
     ReactiveFormsModule,
     InputTextModule,
     DropdownModule,
-    NgIf
+    MultiSelectModule,
+    NgForOf,
+    CardModule
   ],
   templateUrl: './spell-list.component.html',
   styleUrl: './spell-list.component.scss'
@@ -44,6 +48,9 @@ export class SpellListComponent implements OnInit {
   loading = signal<boolean>(true);
   canEdit = signal<boolean>(false);
   showFilter = signal<boolean>(false);
+  first: number = 0;
+  rows: number = 20;
+
   filterForm: FormGroup;
 
   private classesSubject = new BehaviorSubject<any[]>([]);
@@ -52,6 +59,19 @@ export class SpellListComponent implements OnInit {
   private domainsSubject = new BehaviorSubject<any[]>([]);
   domains = toSignal(this.domainsSubject);
 
+  levelOptions = [
+    { label: '0', value: 0 },
+    { label: '1', value: 1 },
+    { label: '2', value: 2 },
+    { label: '3', value: 3 },
+    { label: '4', value: 4 },
+    { label: '5', value: 5 },
+    { label: '6', value: 6 },
+    { label: '7', value: 7 },
+    { label: '8', value: 8 },
+    { label: '9', value: 9 }
+  ];
+
   private spellService = inject(SpellService);
   private authService = inject(AuthService);
   private messageService = inject(MessageService);
@@ -59,13 +79,15 @@ export class SpellListComponent implements OnInit {
   private fb = inject(FormBuilder);
   private characterClassService = inject(CharacterClassService);
   private domainService = inject(DomainService);
+  private router = inject(Router);
 
   constructor() {
     this.filterForm = this.fb.group({
       name: [''],
-      class: [''],
-      domain: [''],
-      level: [''],
+      class: [[]],
+      domain: [[]],
+      minLevel: [''],
+      maxLevel: [''],
       school: [''],
       description: [''],
       effect: [''],
@@ -113,11 +135,15 @@ export class SpellListComponent implements OnInit {
   }
 
   applyFilter() {
-    this.loadSpells({ first: 0, rows: 20 });
+    this.loadSpells({ first: this.first, rows: this.rows });
   }
 
   resetFilter() {
     this.filterForm.reset({
+      class: [],
+      domain: [],
+      minLevel: '',
+      maxLevel: '',
       verbalComponents: false,
       materialComponents: false,
       somaticComponents: false,
@@ -150,7 +176,8 @@ export class SpellListComponent implements OnInit {
   }
 
   viewDetails(id: number) {
-    // Implement navigation to spell details page
+    console.log("navigate: "+id);
+    this.router.navigate(['/spells', id]);
   }
 
   editSpell(id: number) {

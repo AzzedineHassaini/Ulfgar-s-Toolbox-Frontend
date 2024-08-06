@@ -3,6 +3,7 @@ import {HomeComponent} from "./core/layout/home/home.component";
 import {LoginComponent} from "./features/auth/components/login/login.component";
 import {RegisterComponent} from "./features/auth/components/register/register.component";
 import {SpellListComponent} from "./features/spells/components/spell-list/spell-list.component";
+import {SpellDetailComponent} from "./features/spells/components/spell-detail/spell-detail.component";
 
 export const routes: Routes = [
   {
@@ -25,5 +26,9 @@ export const routes: Routes = [
   {
     path: 'spells',
     component: SpellListComponent
+  },
+  {
+    path: 'spells/:id',
+    component: SpellDetailComponent
   }
 ];
