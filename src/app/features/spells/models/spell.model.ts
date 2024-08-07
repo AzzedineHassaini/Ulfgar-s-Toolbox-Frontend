@@ -9,6 +9,7 @@ export interface SpellShort {
   id: number;
   name: string;
   school: string;
+  schoolImage: string;
   components: string;
   classLevels: string;
   domainLevels: string;
@@ -18,6 +19,7 @@ export interface SpellDetails {
   id: number;
   name: string;
   school: string;
+  schoolImage: string;
   schoolComplement: string;
   description: string;
   savingThrow: string;

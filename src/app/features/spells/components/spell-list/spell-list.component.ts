@@ -18,9 +18,11 @@ import { DropdownModule } from "primeng/dropdown";
 import { MultiSelectModule } from "primeng/multiselect";
 import { CharacterClassService } from "../../../character-class/services/character-class.service";
 import { DomainService } from "../../../domain/services/domain.service";
-import {NgForOf} from "@angular/common";
+import {NgForOf, NgIf} from "@angular/common";
 import {CardModule} from "primeng/card";
 import {Router} from "@angular/router";
+import {SpellSchoolService} from "../../../spell-schools/services/spell-school.service";
+import {ImageService} from "../../../../shared/tools/image.service";
 
 @Component({
   selector: 'app-spell-list',
@@ -37,7 +39,8 @@ import {Router} from "@angular/router";
     DropdownModule,
     MultiSelectModule,
     NgForOf,
-    CardModule
+    CardModule,
+    NgIf
   ],
   templateUrl: './spell-list.component.html',
   styleUrl: './spell-list.component.scss'
@@ -59,6 +62,9 @@ export class SpellListComponent implements OnInit {
   private domainsSubject = new BehaviorSubject<any[]>([]);
   domains = toSignal(this.domainsSubject);
 
+  private schoolsSubject = new BehaviorSubject<any[]>([]);
+  schools = toSignal(this.schoolsSubject);
+
   levelOptions = [
     { label: '0', value: 0 },
     { label: '1', value: 1 },
@@ -73,6 +79,7 @@ export class SpellListComponent implements OnInit {
   ];
 
   private spellService = inject(SpellService);
+  private spellSchoolService = inject(SpellSchoolService);
   private authService = inject(AuthService);
   private messageService = inject(MessageService);
   private confirmationService = inject(ConfirmationService);
@@ -80,6 +87,7 @@ export class SpellListComponent implements OnInit {
   private characterClassService = inject(CharacterClassService);
   private domainService = inject(DomainService);
   private router = inject(Router);
+  private imageService = inject(ImageService);
 
   constructor() {
     this.filterForm = this.fb.group({
@@ -101,6 +109,7 @@ export class SpellListComponent implements OnInit {
     effect(() => {
       this.loadClasses();
       this.loadDomains();
+      this.loadSchools();
     });
   }
 
@@ -125,6 +134,16 @@ export class SpellListComponent implements OnInit {
       tap(response => this.domainsSubject.next(response.content)),
       catchError(error => {
         console.error('Error loading domains', error);
+        return of({ content: [] });
+      })
+    ).subscribe();
+  }
+
+  loadSchools() {
+    this.spellSchoolService.getAllSchools().pipe(
+      tap(response => this.schoolsSubject.next(response)),
+      catchError(error => {
+        console.error('Error loading schools', error);
         return of({ content: [] });
       })
     ).subscribe();
@@ -208,5 +227,13 @@ export class SpellListComponent implements OnInit {
 
   addNewSpell() {
     // Implement navigation to add new spell page
+  }
+
+  hasImage(image: any) {
+    return this.imageService.hasImage(image)
+  }
+
+  getImage(image: any){
+    return this.imageService.getImage(image)
   }
 }

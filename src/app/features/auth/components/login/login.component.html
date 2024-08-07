@@ -18,6 +18,13 @@
         </div>
 
         <p-button type="submit" label="Se connecter" styleClass="custom-button"></p-button>
+        <label class="flex justify-content-between">
+          <label>
+            <p-checkbox formControlName="rememberMe" [binary]="true" inputId="rememberMe" id="rememberMe"></p-checkbox>
+            <label class="ml-1 text-sm" for="rememberMe">Se souvenir de moi</label>
+          </label>
+          <a class="text-sm underline" [routerLink]="registerPath">S'enregistrer</a>
+        </label>
       </form>
     </div>
 
