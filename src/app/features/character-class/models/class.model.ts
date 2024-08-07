@@ -8,5 +8,5 @@ export interface PagedClasses {
 export interface Class {
   id: number;
   name: string;
-  power: string;
+  image: string;
 }

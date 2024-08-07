@@ -1,16 +1,17 @@
 import {Component, ViewEncapsulation} from '@angular/core';
-import {FormBuilder, FormGroup, ReactiveFormsModule} from "@angular/forms";
+import {FormBuilder, FormGroup, FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {InputGroupModule} from "primeng/inputgroup";
 import {InputGroupAddonModule} from "primeng/inputgroupaddon";
 import {Button, ButtonDirective, ButtonModule} from "primeng/button";
 import {PasswordModule} from "primeng/password";
 import {InputTextModule} from "primeng/inputtext";
 import {LOGIN_FORM} from "../../form/login.form";
-import {Router} from "@angular/router";
+import {Router, RouterLink} from "@angular/router";
 import {AuthService} from "../../services/auth.service";
 import {MessagesModule} from "primeng/messages";
 import {NgClass, NgIf} from "@angular/common";
 import {ErrorComponent} from "../../../../shared/components/error/error.component";
+import {CheckboxModule} from "primeng/checkbox";
 
 @Component({
   selector: 'app-login',
@@ -27,7 +28,10 @@ import {ErrorComponent} from "../../../../shared/components/error/error.componen
     ErrorComponent,
     NgClass,
     ButtonDirective,
-    ButtonModule
+    ButtonModule,
+    FormsModule,
+    CheckboxModule,
+    RouterLink
   ],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss',
@@ -37,6 +41,7 @@ export class LoginComponent {
 
   form: FormGroup;
   serverError: string = '';
+  registerPath = "/register"
 
   constructor(
     private _fb: FormBuilder,
@@ -44,6 +49,12 @@ export class LoginComponent {
     private _router: Router
   ) {
     this.form = this._fb.group(LOGIN_FORM);
+    console.log("remember me : "+this.form.value.rememberMe)
+    this.form.value.rememberMe = (_auth.getRememberMe() === 'true');
+    console.log("remember me : "+this.form.value.rememberMe)
+    if (this.form.value.rememberMe) {
+      this.form.value.email = _auth.getEmail();
+    }
   }
 
   onSubmit() {
@@ -97,6 +108,10 @@ export class LoginComponent {
   isFieldInvalid(fieldName: string): boolean {
     const control = this.form.get(fieldName);
     return !!control && control.invalid && (control.dirty || control.touched);
+  }
+
+  register(){
+    this._router.navigate(['register']);
   }
 
 }

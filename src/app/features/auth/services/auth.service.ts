@@ -49,7 +49,12 @@ export class AuthService {
   }
 
   login(form: ILoginForm): Observable<IAuth> {
-    console.log('API URL:', environment.apiUrl);
+    if (form.rememberMe) {
+      localStorage.setItem('rememberMe', 'true');
+      localStorage.setItem('email', form.email);
+    } else {
+      sessionStorage.setItem('email', form.email);
+    }
     return this._client.post<IAuth>(`${environment.apiUrl}/auth/login`, form).pipe(
       tap((auth) => {
         this.currentUser = auth;
@@ -89,6 +94,9 @@ export class AuthService {
 
   logout(){
     this.currentUser = undefined;
+    localStorage.removeItem('rememberMe');
+    localStorage.removeItem('email');
+    sessionStorage.removeItem('email');
   }
 
   loadUser(){
@@ -96,6 +104,14 @@ export class AuthService {
     if( userCookie ){
       this.currentUser = JSON.parse( atob(userCookie) )
     }
+  }
+
+  getRememberMe(): string | null{
+    return localStorage.getItem('rememberMe');
+  }
+
+  getEmail(): string | null{
+    return localStorage.getItem('email') || sessionStorage.getItem('email');
   }
 
 }

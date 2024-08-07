@@ -6,6 +6,7 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
 import {provideHttpClient, withInterceptors} from "@angular/common/http";
 import {authInterceptor} from "./shared/interceptors/jwt.interceptor";
 import {ConfirmationService, MessageService} from "primeng/api";
+import {ImageService} from "./shared/tools/image.service";
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -16,6 +17,7 @@ export const appConfig: ApplicationConfig = {
       authInterceptor
     ])),
     MessageService,
-    ConfirmationService
+    ConfirmationService,
+    ImageService
   ]
 };

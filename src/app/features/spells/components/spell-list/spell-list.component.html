@@ -17,12 +17,80 @@
 
           <div class="col-12 md:col-3 mb-3">
             <label for="class" class="block mb-2">Classe</label>
-            <p-multiSelect id="class" [options]="classes()" formControlName="class" optionLabel="name" optionValue="name" [filter]="true" filterBy="name" [showToggleAll]="true" [showHeader]="false" class="w-full"></p-multiSelect>
+            <p-multiSelect id="class" placeholder="Classes" [options]="classes()" formControlName="class" optionLabel="name" optionValue="name" [filter]="true" filterBy="name" [showToggleAll]="true" [showHeader]="false" class="w-full custom-multiselect">
+              <ng-template let-value pTemplate="selectedItems">
+                <div class="inline-flex align-items-center gap-1 px-1" *ngFor="let option of value">
+                  @if (hasImage(option.image)){
+                    <img
+                      [src]="getImage(option.image)"
+                      style="width: 18px" />
+                  }
+                  <div>{{ option.name }},</div>
+                </div>
+              </ng-template>
+              <ng-template let-class pTemplate="item">
+                <div class="flex align-items-center gap-2">
+                  @if (hasImage(class.image)){
+                    <img
+                      [src]="getImage(class.image)"
+                      style="width: 18px" />
+                  }
+                  <div>{{ class.name }}</div>
+                </div>
+              </ng-template>
+            </p-multiSelect>
+          </div>
+
+          <div class="col-12 md:col-3 mb-3">
+            <label for="class" class="block mb-2">École</label>
+            <p-multiSelect id="schools" [options]="schools()" formControlName="school" optionLabel="name" optionValue="name" [filter]="true" filterBy="name" [showToggleAll]="true" [showHeader]="false" class="w-full custom-multiselect">
+              <ng-template let-value pTemplate="selectedItems">
+                <div class="inline-flex align-items-center gap-1 px-1" *ngFor="let option of value">
+                  @if (hasImage(option.image)){
+                    <img
+                      [src]="getImage(option.image)"
+                      style="width: 18px" />
+                  }
+                  <div>{{ option.name }},</div>
+                </div>
+              </ng-template>
+              <ng-template let-school pTemplate="item">
+                <div class="flex align-items-center gap-2">
+                  @if (hasImage(school.image)){
+                    <img
+                      [src]="getImage(school.image)"
+                      style="width: 18px" />
+                  }
+                  <div>{{ school.name }}</div>
+                </div>
+              </ng-template>
+            </p-multiSelect>
           </div>
 
           <div class="col-12 md:col-3 mb-3">
             <label for="domain" class="block mb-2">Domaine</label>
-            <p-multiSelect id="domain" [options]="domains()" formControlName="domain" optionLabel="name" optionValue="name" [filter]="true" filterBy="name" [showToggleAll]="true" [showHeader]="false" class="w-full"></p-multiSelect>
+            <p-multiSelect id="domain" [options]="domains()" formControlName="domain" optionLabel="name" optionValue="name" [filter]="true" filterBy="name" [showToggleAll]="true" [showHeader]="false" class="w-full custom-multiselect">
+              <ng-template let-value pTemplate="selectedItems">
+                <div class="inline-flex align-items-center gap-1 px-1" *ngFor="let option of value">
+                  @if (hasImage(option.image)){
+                    <img
+                      [src]="getImage(option.image)"
+                      style="width: 18px" />
+                  }
+                  <div>{{ option.name }},</div>
+                </div>
+              </ng-template>
+              <ng-template let-domain pTemplate="item">
+                <div class="flex align-items-center gap-2">
+                  @if (hasImage(domain.image)){
+                    <img
+                      [src]="getImage(domain.image)"
+                      style="width: 18px" />
+                  }
+                  <div>{{ domain.name }}</div>
+                </div>
+              </ng-template>
+            </p-multiSelect>
           </div>
 
           <div class="col-12 md:col-3 mb-3">
@@ -38,10 +106,10 @@
             </div>
           </div>
 
-          <div class="col-12 md:col-3 mb-3">
-            <label for="school" class="block mb-2">École</label>
-            <input id="school" type="text" pInputText formControlName="school" class="w-full">
-          </div>
+<!--          <div class="col-12 md:col-3 mb-3">-->
+<!--            <label for="school" class="block mb-2">École</label>-->
+<!--            <input id="school" type="text" pInputText formControlName="school" class="w-full">-->
+<!--          </div>-->
 
           <div class="col-12 md:col-3 mb-3">
             <label for="description" class="block mb-2">Description</label>
@@ -112,7 +180,10 @@
   <ng-template pTemplate="body" let-spell>
     <tr>
       <td>{{spell.name}}</td>
-      <td>{{spell.school}}</td>
+      <td>
+        <img [src]="getImage(spell.schoolImage)" style="width: 18px">
+        {{spell.school}}
+      </td>
       <td>
         @if (spell.classLevels){
           @for (level of spell.classLevels.split(';'); track $index) {
