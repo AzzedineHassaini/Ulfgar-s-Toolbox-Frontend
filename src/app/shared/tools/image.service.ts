@@ -1,3 +1,5 @@
+import {environment} from "../../../environments/environment";
+
 export class ImageService {
 
   hasImage(image: any){
@@ -5,6 +7,6 @@ export class ImageService {
   }
 
   getImage(image: any) {
-    return 'api/v1/file/images/'+image;
+    return environment.apiUrl+'/file/images/'+image;
   }
 }
