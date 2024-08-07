@@ -1,111 +1,147 @@
-<div class="card">
-  <h2>Liste de sorts</h2>
+<p-card>
+  <div class="flex align-items-center mb-3">
+    <h2 class="mr-3 my-0">Liste de sorts</h2>
+    <p-button (click)="toggleFilter()"
+              [label]="showFilter() ? 'Masquer les filtres' : 'Afficher les filtres'"
+              styleClass="p-button-link p-button-sm"></p-button>
+  </div>
 
-  <p-button (onClick)="toggleFilter()" [label]="showFilter() ? 'Cacher les filtres' : 'Afficher les filtres'" styleClass="mb-3"></p-button>
+  @if (showFilter()) {
+    <p-card styleClass="mb-3">
+      <form [formGroup]="filterForm" (ngSubmit)="applyFilter()">
+        <div class="grid">
+          <div class="col-12 md:col-3 mb-3">
+            <label for="name" class="block mb-2">Nom</label>
+            <input id="name" type="text" pInputText formControlName="name" class="w-full">
+          </div>
 
-  <form *ngIf="showFilter()" [formGroup]="filterForm" (ngSubmit)="applyFilter()" class="mb-3">
-    <div class="grid">
-      <div class="col-12 md:col-3">
-            <span class="p-float-label">
-              <input id="name" type="text" pInputText formControlName="name">
-              <label for="name">Nom</label>
-            </span>
-      </div>
-      <div class="col-12 md:col-3">
-            <span class="p-float-label">
-              <p-dropdown id="class" [options]="classes()" formControlName="class" optionLabel="name" optionValue="name"></p-dropdown>
-              <label for="class">Classe</label>
-            </span>
-      </div>
-      <div class="col-12 md:col-3">
-            <span class="p-float-label">
-              <p-dropdown id="domain" [options]="domains()" formControlName="domain" optionLabel="name" optionValue="name"></p-dropdown>
-              <label for="domain">Domaine</label>
-            </span>
-      </div>
-      <div class="col-12 md:col-3">
-            <span class="p-float-label">
-              <input id="level" type="number" pInputText formControlName="level">
-              <label for="level">Niveau</label>
-            </span>
-      </div>
-      <div class="col-12 md:col-3">
-            <span class="p-float-label">
-              <input id="school" type="text" pInputText formControlName="school">
-              <label for="school">École</label>
-            </span>
-      </div>
-      <div class="col-12 md:col-3">
-            <span class="p-float-label">
-              <input id="description" type="text" pInputText formControlName="description">
-              <label for="description">Description</label>
-            </span>
-      </div>
-      <div class="col-12 md:col-3">
-            <span class="p-float-label">
-              <input id="effect" type="text" pInputText formControlName="effect">
-              <label for="effect">Effet</label>
-            </span>
-      </div>
-    </div>
-    <div class="grid mt-3">
-      <div class="col-12 md:col-2">
-        <p-checkbox formControlName="verbalComponents" label="Composante verbale"></p-checkbox>
-      </div>
-      <div class="col-12 md:col-2">
-        <p-checkbox formControlName="materialComponents" label="Composante matérielle"></p-checkbox>
-      </div>
-      <div class="col-12 md:col-2">
-        <p-checkbox formControlName="somaticComponents" label="Composante somatique"></p-checkbox>
-      </div>
-      <div class="col-12 md:col-2">
-        <p-checkbox formControlName="focusComponents" label="Composante focaliseur"></p-checkbox>
-      </div>
-      <div class="col-12 md:col-2">
-        <p-checkbox formControlName="experienceComponents" label="Composante XP"></p-checkbox>
-      </div>
-    </div>
-    <div class="mt-3">
-      <p-button type="submit" label="Appliquer les filtres"></p-button>
-      <p-button type="button" label="Réinitialiser" (onClick)="resetFilter()" styleClass="p-button-secondary ml-2"></p-button>
-    </div>
-  </form>
+          <div class="col-12 md:col-3 mb-3">
+            <label for="class" class="block mb-2">Classe</label>
+            <p-multiSelect id="class" [options]="classes()" formControlName="class" optionLabel="name" optionValue="name" [filter]="true" filterBy="name" [showToggleAll]="true" [showHeader]="false" class="w-full"></p-multiSelect>
+          </div>
 
-  <p-table [value]="spells()" [lazy]="true" (onLazyLoad)="loadSpells($event)"
-           [paginator]="true" [rows]="20" [totalRecords]="totalRecords()" [loading]="loading()"
-           [globalFilterFields]="['name','school','level']">
-    <ng-template pTemplate="header">
-      <tr>
-        <th>Nom</th>
-        <th>École</th>
-        <th>Niveaux</th>
-        <th></th>
-      </tr>
-    </ng-template>
-    <ng-template pTemplate="body" let-spell>
-      <tr>
-        <td>{{spell.name}}</td>
-        <td>{{spell.school}}</td>
-        <td>
-          <ng-container *ngFor="let level of spell.levels.split(';'); let last = last">
-            <p-chip [label]="level.replace(':',' ')" styleClass="mr-2" [removable]="false"></p-chip>
-          </ng-container>
-        </td>
-        <td>
-          <p-button icon="pi pi-eye" (onClick)="viewDetails(spell.id)" styleClass="p-button-rounded p-button-text"></p-button>
-          @if (canEdit()) {
-            <p-button icon="pi pi-pencil" (onClick)="editSpell(spell.id)" styleClass="p-button-rounded p-button-text p-button-warning"></p-button>
-            <p-button icon="pi pi-trash" (onClick)="deleteSpell(spell.id)" styleClass="p-button-rounded p-button-text p-button-danger"></p-button>
-          }
-        </td>
-      </tr>
-    </ng-template>
-  </p-table>
+          <div class="col-12 md:col-3 mb-3">
+            <label for="domain" class="block mb-2">Domaine</label>
+            <p-multiSelect id="domain" [options]="domains()" formControlName="domain" optionLabel="name" optionValue="name" [filter]="true" filterBy="name" [showToggleAll]="true" [showHeader]="false" class="w-full"></p-multiSelect>
+          </div>
 
-  @if (canEdit()) {
-    <p-button label="Add New Spell" icon="pi pi-plus" styleClass="p-button-success" (onClick)="addNewSpell()"></p-button>
+          <div class="col-12 md:col-3 mb-3">
+            <div class="flex gap-2">
+              <div class="flex-grow-1">
+                <label for="minLevel" class="block mb-2">Niveau min</label>
+                <p-dropdown id="minLevel" [options]="levelOptions" formControlName="minLevel" placeholder="Min" class="w-full"></p-dropdown>
+              </div>
+              <div class="flex-grow-1">
+                <label for="maxLevel" class="block mb-2">Niveau max</label>
+                <p-dropdown id="maxLevel" [options]="levelOptions" formControlName="maxLevel" placeholder="Max" class="w-full"></p-dropdown>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-12 md:col-3 mb-3">
+            <label for="school" class="block mb-2">École</label>
+            <input id="school" type="text" pInputText formControlName="school" class="w-full">
+          </div>
+
+          <div class="col-12 md:col-3 mb-3">
+            <label for="description" class="block mb-2">Description</label>
+            <input id="description" type="text" pInputText formControlName="description" class="w-full">
+          </div>
+
+          <div class="col-12 md:col-3 mb-3">
+            <label for="effect" class="block mb-2">Effet</label>
+            <input id="effect" type="text" pInputText formControlName="effect" class="w-full">
+          </div>
+
+          <div class="col-12 mb-3">
+            <label class="block mb-2">Composantes</label>
+            <div class="flex flex-wrap gap-3">
+              <div class="flex align-items-center">
+                <p-checkbox formControlName="verbalComponents" [binary]="true" inputId="verbalComponents"></p-checkbox>
+                <label for="verbalComponents" class="ml-2">Verbales</label>
+              </div>
+              <div class="flex align-items-center">
+                <p-checkbox formControlName="materialComponents" [binary]="true" inputId="materialComponents"></p-checkbox>
+                <label for="materialComponents" class="ml-2">Matérielles</label>
+              </div>
+              <div class="flex align-items-center">
+                <p-checkbox formControlName="somaticComponents" [binary]="true" inputId="somaticComponents"></p-checkbox>
+                <label for="somaticComponents" class="ml-2">Gestuelles</label>
+              </div>
+              <div class="flex align-items-center">
+                <p-checkbox formControlName="focusComponents" [binary]="true" inputId="focusComponents"></p-checkbox>
+                <label for="focusComponents" class="ml-2">Focalisateur</label>
+              </div>
+              <div class="flex align-items-center">
+                <p-checkbox formControlName="experienceComponents" [binary]="true" inputId="experienceComponents"></p-checkbox>
+                <label for="experienceComponents" class="ml-2">Expérience</label>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="flex justify-content-end mt-3">
+          <p-button type="submit" label="Appliquer les filtres" icon="pi pi-search" styleClass="p-button-primary mr-2"></p-button>
+          <p-button type="button" label="Réinitialiser" icon="pi pi-refresh" styleClass="p-button-secondary" (click)="resetFilter()"></p-button>
+        </div>
+      </form>
+    </p-card>
   }
-</div>
 
-<p-confirmDialog [style]="{width: '50vw'}"></p-confirmDialog>
+<p-table
+  [value]="spells()"
+  [lazy]="true"
+  (onLazyLoad)="loadSpells($event)"
+  [paginator]="true"
+  [first]="first"
+  [rows]="rows"
+  [totalRecords]="totalRecords()"
+  [loading]="loading()"
+  [rowsPerPageOptions]="[20, 50, 100]"
+  paginatorPosition="both"
+  styleClass="p-datatable-striped"
+>
+  <ng-template pTemplate="header">
+    <tr>
+      <th>Nom</th>
+      <th>École</th>
+      <th>Niveaux</th>
+      <th>Actions</th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-spell>
+    <tr>
+      <td>{{spell.name}}</td>
+      <td>{{spell.school}}</td>
+      <td>
+        @if (spell.classLevels){
+          @for (level of spell.classLevels.split(';'); track $index) {
+            <p-chip class="classChip" [label]="level.replace(':', ' ')" styleClass="mr-2" [removable]="false"></p-chip>
+          }
+        }
+        @if (spell.domainLevels){
+          @for (level of spell.domainLevels.split(';'); track $index) {
+            <p-chip class="domainChip" [label]="level.replace(':', ' ')" styleClass="mr-2" [removable]="false"></p-chip>
+          }
+        }
+      </td>
+      <td>
+        <p-button icon="pi pi-eye" (click)="viewDetails(spell.id)" styleClass="p-button-rounded p-button-text"></p-button>
+        @if (canEdit()) {
+          <p-button icon="pi pi-pencil" (click)="editSpell(spell.id)" styleClass="p-button-rounded p-button-text p-button-warning"></p-button>
+          <p-button icon="pi pi-trash" (click)="deleteSpell(spell.id)" styleClass="p-button-rounded p-button-text p-button-danger"></p-button>
+        }
+      </td>
+    </tr>
+  </ng-template>
+</p-table>
+
+@if (canEdit()) {
+  <div class="mt-3">
+    <p-button label="Ajouter un nouveau sort" icon="pi pi-plus" (click)="addNewSpell()"></p-button>
+  </div>
+}
+</p-card>
+
+<p-confirmDialog></p-confirmDialog>
 <p-toast></p-toast>

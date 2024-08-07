@@ -8,7 +8,6 @@ export interface PagedSpells {
 export interface SpellShort {
   id: number;
   name: string;
-  levels: string;
   school: string;
   components: string;
   classLevels: string;
@@ -18,7 +17,6 @@ export interface SpellShort {
 export interface SpellDetails {
   id: number;
   name: string;
-  levels: string;
   school: string;
   schoolComplement: string;
   description: string;
@@ -32,12 +30,17 @@ export interface SpellDetails {
   components: string;
   classLevels: string;
   domainLevels: string;
+  idRuleBook: number;
+  page: number;
+  bookName: string;
+  bookShortName: string;
 }
 
 export interface SpellParams {
   class?: string;
   domain?: string;
-  level?: string;
+  minLevel?: string;
+  maxLevel?: string;
   name?: string;
   school?: string;
   description?: string;
