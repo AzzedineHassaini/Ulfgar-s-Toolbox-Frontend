@@ -64,11 +64,15 @@ export class HeaderComponent {
         label: 'Accueil',
         routerLink: '/home',
         icon: 'pi pi-home',
+        tabindex: '0',
+        ariaLabel: 'Aller à la page d\'accueil'
       },
       {
         label: 'Sorts',
         routerLink: '/spells',
-        icon: 'pi pi-sparkles'
+        icon: 'pi pi-sparkles',
+        tabindex: '0',
+        ariaLabel: 'Aller à la page des sorts'
       }
     ];
   }
@@ -79,12 +83,16 @@ export class HeaderComponent {
         {
           label: this.currentUser.user.pseudo,
           icon: 'pi pi-user',
-          command: () => this.openProfile()
+          command: () => this.openProfile(),
+          tabindex: '0',
+          ariaLabel: 'Ouvrir le profil'
         },
         {
           label: 'Déconnexion',
           icon: 'pi pi-power-off',
-          command: () => this.handleLogout()
+          command: () => this.handleLogout(),
+          tabindex: '0',
+          ariaLabel: 'Se déconnecter'
         }
       ];
     } else {
@@ -92,12 +100,16 @@ export class HeaderComponent {
         {
           label: 'Connexion',
           icon: 'pi pi-sign-in',
-          routerLink: '/login'
+          routerLink: '/login',
+          tabindex: '0',
+          ariaLabel: 'Se connecter'
         },
         {
           label: 'Créer un compte',
           icon: 'pi pi-user-plus',
-          routerLink: '/register'
+          routerLink: '/register',
+          tabindex: '0',
+          ariaLabel: 'Créer un nouveau compte'
         }
       ];
     }

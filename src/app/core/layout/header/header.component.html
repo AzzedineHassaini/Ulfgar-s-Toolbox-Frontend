@@ -1,15 +1,19 @@
-<div class="header-container">
+<div class="header-container" role="navigation" aria-label="Navigation principale">
   <div class="mobile-menu">
-    <p-menubar [model]="leftItems" [styleClass]="'full-width'">
-      <div class="right-menu">
-        @if (isMobileView) {
-          <p-menu #menu [popup]="true" [model]="rightItems"></p-menu>
-          <button pButton type="button" icon="pi pi-user" (click)="menu.toggle($event)"></button>
-        } @else {
-          <p-menubar [model]="rightItems"></p-menubar>
-        }
-      </div>
+    <p-menubar [model]="leftItems" [styleClass]="'full-width'" [autoDisplay]="false">
+      <ng-template pTemplate="start">
+        <span class="sr-only">Menu principal</span>
+      </ng-template>
+      <ng-template pTemplate="end">
+        <div class="right-menu">
+          @if (isMobileView) {
+            <p-menu #menu [popup]="true" [model]="rightItems"></p-menu>
+            <button pButton type="button" icon="pi pi-user" (click)="menu.toggle($event)" aria-label="Ouvrir le menu utilisateur"></button>
+          } @else {
+            <p-menubar [model]="rightItems" [autoDisplay]="false"></p-menubar>
+          }
+        </div>
+      </ng-template>
     </p-menubar>
   </div>
-
 </div>
