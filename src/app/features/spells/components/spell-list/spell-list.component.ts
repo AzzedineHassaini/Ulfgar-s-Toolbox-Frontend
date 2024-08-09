@@ -120,8 +120,8 @@ export class SpellListComponent implements OnInit {
   }
 
   loadClasses() {
-    this.characterClassService.getAllClasses().pipe(
-      tap(response => this.classesSubject.next(response.content)),
+    this.characterClassService.getAllCasters().pipe(
+      tap(response => this.classesSubject.next(response)),
       catchError(error => {
         console.error('Error loading classes', error);
         return of({ content: [] });
