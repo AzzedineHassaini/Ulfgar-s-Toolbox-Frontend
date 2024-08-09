@@ -1,0 +1,73 @@
+<div class="admin-dashboard">
+  <div class="sidebar">
+    <p-button (onClick)="activeTab = 'users'" styleClass="p-button-text" label="Users"></p-button>
+    <p-button (onClick)="activeTab = 'spellHistory'" styleClass="p-button-text" label="Spell History"></p-button>
+  </div>
+
+  <div class="content">
+    @if (activeTab === 'users') {
+      <div class="users-section">
+        <h2>Users</h2>
+        <p-table [value]="users" (onSort)="onSort($event)" [sortField]="sortField" [sortOrder]="sortOrder">
+          <ng-template pTemplate="header">
+            <tr>
+              <th pSortableColumn="id">ID <p-sortIcon field="id"></p-sortIcon></th>
+              <th pSortableColumn="email">Email <p-sortIcon field="email"></p-sortIcon></th>
+              <th pSortableColumn="pseudo">Pseudo <p-sortIcon field="pseudo"></p-sortIcon></th>
+              <th pSortableColumn="role">Role <p-sortIcon field="role"></p-sortIcon></th>
+              <th></th>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-user>
+            <tr>
+              <td>{{user.id}}</td>
+              <td>{{user.email}}</td>
+              <td>{{user.pseudo}}</td>
+              <td>
+                <p-dropdown [options]="[{label: 'User', value: 'USER'},{label: 'Contributor', value: 'CONTRIBUTOR'}, {label: 'Admin', value: 'ADMIN'}]"
+                            [(ngModel)]="user.role" (onChange)="updateUserRole(user, user.role)"></p-dropdown>
+              </td>
+              <td>
+                <p-button icon="pi pi-trash" (click)="deleteUser(user.id)" styleClass="p-button-rounded p-button-text p-button-danger"></p-button>
+              </td>
+            </tr>
+          </ng-template>
+        </p-table>
+      </div>
+    }
+
+    @if (activeTab === 'spellHistory') {
+      <div class="spell-history-section">
+        <h2>Spell History</h2>
+        <p-table [value]="spellHistory" [lazy]="true" (onLazyLoad)="loadSpellHistory($event)"
+                 [paginator]="true" [rows]="20" [totalRecords]="totalRecords" [rowsPerPageOptions]="[20, 50, 100, 250]"
+                 [scrollable]="true" scrollHeight="flex" [sortField]="sortField" [sortOrder]="sortOrder">
+          <ng-template pTemplate="header">
+            <tr>
+              <th pSortableColumn="spellName">Spell Name <p-sortIcon field="spellName"></p-sortIcon></th>
+              <th pSortableColumn="action">Action <p-sortIcon field="action"></p-sortIcon></th>
+              <th pSortableColumn="updatedTable">Updated Table <p-sortIcon field="updatedTable"></p-sortIcon></th>
+              <th pSortableColumn="updatedField">Updated Field <p-sortIcon field="updatedField"></p-sortIcon></th>
+              <th pSortableColumn="oldValue">Old Value <p-sortIcon field="oldValue"></p-sortIcon></th>
+              <th pSortableColumn="newValue">New Value <p-sortIcon field="newValue"></p-sortIcon></th>
+              <th pSortableColumn="date">Date <p-sortIcon field="date"></p-sortIcon></th>
+              <th pSortableColumn="user">User <p-sortIcon field="user"></p-sortIcon></th>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-spell>
+            <tr>
+              <td>{{spell.spellName}}</td>
+              <td>{{spell.action}}</td>
+              <td>{{spell.updatedTable}}</td>
+              <td>{{spell.updatedField}}</td>
+              <td>{{spell.oldValue}}</td>
+              <td>{{spell.newValue}}</td>
+              <td>{{spell.date}}</td>
+              <td>{{spell.user}}</td>
+            </tr>
+          </ng-template>
+        </p-table>
+      </div>
+    }
+  </div>
+</div>

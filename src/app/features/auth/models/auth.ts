@@ -1,3 +1,5 @@
+import {UserRole} from "../../../shared/enums/userRole";
+
 export interface IAuth {
   accessToken: string,
   user:{
@@ -8,9 +10,4 @@ export interface IAuth {
   }
 }
 
-export enum UserRole {
-  ADMIN = 'ADMIN',
-  USER = 'USER',
-  CONTRIBUTOR = 'CONTRIBUTOR'
-}
 

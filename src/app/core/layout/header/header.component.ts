@@ -55,6 +55,15 @@ export class HeaderComponent {
 
   private updateMenuItems() {
     this.leftItems = this.getLeftMenu();
+    if (this.currentUser?.user.role === 'ADMIN'){
+      this.leftItems.push({
+        label: 'Admin dashboard',
+        routerLink: '/admin',
+        icon: 'pi pi-cog',
+        tabindex: '0',
+        ariaLabel: 'Admin dashboard'
+      })
+    }
     this.rightItems = this.getRightMenu();
   }
 

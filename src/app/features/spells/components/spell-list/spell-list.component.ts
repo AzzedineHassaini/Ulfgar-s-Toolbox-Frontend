@@ -3,7 +3,6 @@ import { PagedSpells, SpellParams, SpellShort } from "../../models/spell.model";
 import { SpellService } from "../../services/spell.service";
 import { AuthService } from "../../../auth/services/auth.service";
 import { ConfirmationService, MessageService } from "primeng/api";
-import { UserRole } from "../../../auth/models/auth";
 import { toSignal } from "@angular/core/rxjs-interop";
 import { catchError, of, tap, BehaviorSubject } from "rxjs";
 import { TableLazyLoadEvent, TableModule } from "primeng/table";
@@ -23,6 +22,7 @@ import {CardModule} from "primeng/card";
 import {Router} from "@angular/router";
 import {SpellSchoolService} from "../../../spell-schools/services/spell-school.service";
 import {ImageService} from "../../../../shared/tools/image.service";
+import {UserRole} from "../../../../shared/enums/userRole";
 
 @Component({
   selector: 'app-spell-list',
