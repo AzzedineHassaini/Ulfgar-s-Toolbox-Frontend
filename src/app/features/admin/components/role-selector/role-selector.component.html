@@ -1,0 +1,10 @@
+<div class="role-selector" (click)="togglePopup($event)">
+  {{ currentRole }}
+  <i class="pi pi-chevron-down"></i>
+
+  <div class="role-popup" *ngIf="isPopupVisible">
+    <div class="role-option" *ngFor="let role of roles" (click)="selectRole(role)">
+      {{ role }}
+    </div>
+  </div>
+</div>

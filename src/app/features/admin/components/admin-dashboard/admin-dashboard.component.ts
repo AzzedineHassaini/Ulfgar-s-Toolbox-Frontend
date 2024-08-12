@@ -8,14 +8,14 @@ import {TableModule} from "primeng/table";
 import {ButtonModule} from "primeng/button";
 import {DropdownModule} from "primeng/dropdown";
 import {catchError, of, tap} from "rxjs";
-import {PagedSpells} from "../../../spells/models/spell.model";
+import {RoleSelectorComponent} from "../role-selector/role-selector.component";
 
 type SortableUserKey = keyof Pick<User, 'id' | 'email' | 'pseudo' | 'role'>;
 
 @Component({
   selector: 'app-admin-dashboard',
   standalone: true,
-  imports: [CommonModule, FormsModule, TableModule, ButtonModule, DropdownModule],
+  imports: [CommonModule, FormsModule, TableModule, ButtonModule, DropdownModule, RoleSelectorComponent],
   templateUrl: './admin-dashboard.component.html',
   styleUrl: './admin-dashboard.component.scss'
 })

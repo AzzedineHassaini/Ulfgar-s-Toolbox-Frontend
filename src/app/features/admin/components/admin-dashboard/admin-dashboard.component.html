@@ -26,6 +26,7 @@
               <td>
                 <p-dropdown [options]="[{label: 'User', value: 'USER'},{label: 'Contributor', value: 'CONTRIBUTOR'}, {label: 'Admin', value: 'ADMIN'}]"
                             [(ngModel)]="user.role" (onChange)="updateUserRole(user, user.role)"></p-dropdown>
+<!--                <app-role-selector [currentRole]="user.role" (roleChanged)="updateUserRole(user, $event)"></app-role-selector>-->
               </td>
               <td>
                 <p-button icon="pi pi-trash" (click)="deleteUser(user.id)" styleClass="p-button-rounded p-button-text p-button-danger"></p-button>

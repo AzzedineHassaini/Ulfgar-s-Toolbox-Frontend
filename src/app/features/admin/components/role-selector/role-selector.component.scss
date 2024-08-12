@@ -1,0 +1,25 @@
+.role-selector {
+  position: relative;
+  cursor: pointer;
+  padding: 0.5rem;
+  border: 1px solid #ced4da;
+  border-radius: 3px;
+  background-color: #ffffff;
+}
+.role-popup {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 1000;
+  background-color: #ffffff;
+  border: 1px solid #ced4da;
+  border-radius: 3px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+.role-option {
+  padding: 0.5rem;
+  cursor: pointer;
+}
+.role-option:hover {
+  background-color: #f8f9fa;
+}

@@ -1,6 +1,6 @@
 .admin-dashboard {
   display: flex;
-  height: calc(100vh - 64px - 64px); // Assuming header and footer are each 64px tall
+  height: calc(100% - 64px - 64px); // Assuming header and footer are each 64px tall
   overflow: hidden; // Prevent scrollbar on the main container
 
   .sidebar {
@@ -8,7 +8,6 @@
     width: 200px;
     background-color: #f0f0f0;
     padding: 20px;
-    overflow-y: auto; // Allow scrolling if sidebar content is too long
 
     .p-button {
       display: block;
@@ -17,10 +16,13 @@
     }
   }
 
+  p-table, .p-datatable, .p-datatable-wrapper, .p-datatable-table {
+    height: 100%;
+  }
+
   .content {
     flex-grow: 1;
     padding: 20px;
-    overflow: hidden; // Prevent scrollbar on the content container
     display: flex;
     flex-direction: column;
   }
@@ -37,25 +39,15 @@
 
     .p-datatable {
       flex-grow: 1;
-      overflow: hidden; // Hide any overflow
 
       .p-datatable-wrapper {
-        height: 100%; // Take full height of parent
+        height: 100%;
       }
 
       .p-datatable-table {
         height: 100%;
       }
-
-      .p-datatable-scrollable-body {
-        overflow-y: auto; // Allow vertical scrolling only when necessary
-      }
     }
-  }
-
-  // Ensure PrimeNG tables take full height
-  ::ng-deep .p-datatable-scrollable-body {
-    max-height: none !important;
   }
 }
 
@@ -74,5 +66,4 @@ app-header, app-footer {
 // Your main content area should grow to fill available space
 main {
   flex-grow: 1;
-  overflow: hidden; // Prevent scrollbar on the main content area
 }
