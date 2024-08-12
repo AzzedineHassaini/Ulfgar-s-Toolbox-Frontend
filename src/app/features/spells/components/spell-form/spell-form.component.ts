@@ -16,6 +16,7 @@ import {BehaviorSubject, catchError, of, tap} from "rxjs";
 import {toSignal} from "@angular/core/rxjs-interop";
 import {RuleBookService} from "../../../rule-books/services/rule-book.service";
 import {ClassLevel, DomainLevel} from "../../models/spell.model";
+import {RuleBook} from "../../../rule-books/models/rule-book.model";
 
 @Component({
   selector: 'app-spell-form',
@@ -267,5 +268,9 @@ export class SpellFormComponent implements OnInit {
 
   cancel() {
     this.router.navigate(['/spells']);
+  }
+
+  ruleBookLabel: (ruleBook: RuleBook) => string = (ruleBook: RuleBook) => {
+    return `${ruleBook.name} (${ruleBook.shortName})`;
   }
 }

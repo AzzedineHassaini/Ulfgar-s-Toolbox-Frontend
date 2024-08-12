@@ -69,7 +69,14 @@
 
       <div class="col-12 md:col-6">
         <label for="ruleBookId">Livre source</label>
-        <p-dropdown id="ruleBookId" [options]="ruleBooks()" formControlName="ruleBookId" optionLabel="name" optionValue="id" class="w-full"></p-dropdown>
+        <p-dropdown id="ruleBookId" [options]="ruleBooks()" formControlName="ruleBookId" optionLabel="name"
+                    [filter]="true"
+                    filterBy="name,shortName"
+                    optionValue="id" class="w-full">
+          <ng-template pTemplate="item" let-ruleBook>
+            {{ruleBook.name}} ({{ruleBook.shortName}})
+          </ng-template>
+        </p-dropdown>
       </div>
 
       <div class="col-12 md:col-6">
