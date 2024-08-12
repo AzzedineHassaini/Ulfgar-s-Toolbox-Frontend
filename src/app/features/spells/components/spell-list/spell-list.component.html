@@ -23,19 +23,19 @@
                   @if (hasImage(option.image)){
                     <img
                       [src]="getImage(option.image)"
-                      style="width: 18px" />
+                      style="width: 18px"  [alt]="option.name"/>
                   }
                   <div>{{ option.name }},</div>
                 </div>
               </ng-template>
-              <ng-template let-class pTemplate="item">
+              <ng-template let-classe pTemplate="item">
                 <div class="flex align-items-center gap-2">
-                  @if (hasImage(class.image)){
+                  @if (hasImage(classe.image)){
                     <img
-                      [src]="getImage(class.image)"
-                      style="width: 18px" />
+                      [src]="getImage(classe.image)"
+                      style="width: 18px"  [alt]="classe.name"/>
                   }
-                  <div>{{ class.name }}</div>
+                  <div>{{ classe.name }}</div>
                 </div>
               </ng-template>
             </p-multiSelect>
@@ -49,7 +49,7 @@
                   @if (hasImage(option.image)){
                     <img
                       [src]="getImage(option.image)"
-                      style="width: 18px" />
+                      style="width: 18px"  [alt]="option.name"/>
                   }
                   <div>{{ option.name }},</div>
                 </div>
@@ -59,7 +59,7 @@
                   @if (hasImage(school.image)){
                     <img
                       [src]="getImage(school.image)"
-                      style="width: 18px" />
+                      style="width: 18px"  [alt]="school.name"/>
                   }
                   <div>{{ school.name }}</div>
                 </div>
@@ -75,7 +75,7 @@
                   @if (hasImage(option.image)){
                     <img
                       [src]="getImage(option.image)"
-                      style="width: 18px" />
+                      style="width: 18px"  [alt]="option.name"/>
                   }
                   <div>{{ option.name }},</div>
                 </div>
@@ -85,7 +85,7 @@
                   @if (hasImage(domain.image)){
                     <img
                       [src]="getImage(domain.image)"
-                      style="width: 18px" />
+                      style="width: 18px"  [alt]="domain.name"/>
                   }
                   <div>{{ domain.name }}</div>
                 </div>
@@ -106,11 +106,6 @@
             </div>
           </div>
 
-<!--          <div class="col-12 md:col-3 mb-3">-->
-<!--            <label for="school" class="block mb-2">École</label>-->
-<!--            <input id="school" type="text" pInputText formControlName="school" class="w-full">-->
-<!--          </div>-->
-
           <div class="col-12 md:col-3 mb-3">
             <label for="description" class="block mb-2">Description</label>
             <input id="description" type="text" pInputText formControlName="description" class="w-full">
@@ -125,23 +120,23 @@
             <label class="block mb-2">Composantes</label>
             <div class="flex flex-wrap gap-3">
               <div class="flex align-items-center">
-                <p-checkbox formControlName="verbalComponents" [binary]="true" inputId="verbalComponents"></p-checkbox>
+                <p-checkbox formControlName="verbalComponents" [binary]="true" id="verbalComponents"></p-checkbox>
                 <label for="verbalComponents" class="ml-2">Verbales</label>
               </div>
               <div class="flex align-items-center">
-                <p-checkbox formControlName="materialComponents" [binary]="true" inputId="materialComponents"></p-checkbox>
+                <p-checkbox formControlName="materialComponents" [binary]="true" id="materialComponents"></p-checkbox>
                 <label for="materialComponents" class="ml-2">Matérielles</label>
               </div>
               <div class="flex align-items-center">
-                <p-checkbox formControlName="somaticComponents" [binary]="true" inputId="somaticComponents"></p-checkbox>
+                <p-checkbox formControlName="somaticComponents" [binary]="true" id="somaticComponents"></p-checkbox>
                 <label for="somaticComponents" class="ml-2">Gestuelles</label>
               </div>
               <div class="flex align-items-center">
-                <p-checkbox formControlName="focusComponents" [binary]="true" inputId="focusComponents"></p-checkbox>
+                <p-checkbox formControlName="focusComponents" [binary]="true" id="focusComponents"></p-checkbox>
                 <label for="focusComponents" class="ml-2">Focalisateur</label>
               </div>
               <div class="flex align-items-center">
-                <p-checkbox formControlName="experienceComponents" [binary]="true" inputId="experienceComponents"></p-checkbox>
+                <p-checkbox formControlName="experienceComponents" [binary]="true" id="experienceComponents"></p-checkbox>
                 <label for="experienceComponents" class="ml-2">Expérience</label>
               </div>
             </div>
@@ -181,7 +176,7 @@
     <tr>
       <td>{{spell.name}}</td>
       <td>
-        <img [src]="getImage(spell.schoolImage)" style="width: 18px">
+        <img [src]="getImage(spell.schoolImage)" style="width: 18px" [alt]="spell.school">
         {{spell.school}}
       </td>
       <td>

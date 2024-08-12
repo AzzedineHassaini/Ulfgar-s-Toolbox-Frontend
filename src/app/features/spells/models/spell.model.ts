@@ -32,11 +32,35 @@ export interface SpellDetails {
   components: string;
   classLevels: string;
   domainLevels: string;
-  idRuleBook: number;
+  ruleBookId: number;
   page: number;
   bookName: string;
   bookShortName: string;
 }
+
+export interface SpellDetailsForm {
+  id: number;
+  name: string;
+  school: string;
+  schoolImage: string;
+  schoolComplement: string;
+  description: string;
+  savingThrow: string;
+  castingTime: string;
+  range: string;
+  targets: string;
+  effect: string;
+  duration: string;
+  spellResistance: string;
+  components: string;
+  classLevels: {[key: number]: number };
+  domainLevels: {[key: number]: number };
+  ruleBookId: number;
+  page: number;
+  bookName: string;
+  bookShortName: string;
+}
+
 
 export interface SpellParams {
   class?: string;
@@ -52,4 +76,14 @@ export interface SpellParams {
   somaticComponents?: boolean;
   focusComponents?: boolean;
   experienceComponents?: boolean;
+}
+
+export interface ClassLevel {
+  id: number;
+  level: number;
+}
+
+export interface DomainLevel {
+  id: number;
+  level: number;
 }

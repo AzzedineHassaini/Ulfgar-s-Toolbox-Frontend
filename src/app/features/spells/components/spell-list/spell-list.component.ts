@@ -196,11 +196,7 @@ export class SpellListComponent implements OnInit {
 
   viewDetails(id: number) {
     console.log("navigate: "+id);
-    this.router.navigate(['/spells', id]);
-  }
-
-  editSpell(id: number) {
-    // Implement navigation to spell edit page
+    this.router.navigate(['/spells/details', id]);
   }
 
   deleteSpell(id: number) {
@@ -226,7 +222,11 @@ export class SpellListComponent implements OnInit {
   }
 
   addNewSpell() {
-    // Implement navigation to add new spell page
+    this.router.navigate(['/spells/add']);
+  }
+
+  editSpell(id: number) {
+    this.router.navigate(['/spells/edit', id]);
   }
 
   hasImage(image: any) {

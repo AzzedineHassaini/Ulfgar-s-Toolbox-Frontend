@@ -1,11 +1,10 @@
 .admin-dashboard {
   display: flex;
   height: calc(100% - 64px - 64px); // Assuming header and footer are each 64px tall
-  overflow: hidden; // Prevent scrollbar on the main container
 
   .sidebar {
-    min-width: 200px;
-    width: 200px;
+    min-width: 10%;
+    width: 12%;
     background-color: #f0f0f0;
     padding: 20px;
 
@@ -16,13 +15,10 @@
     }
   }
 
-  p-table, .p-datatable, .p-datatable-wrapper, .p-datatable-table {
-    height: 100%;
-  }
-
   .content {
     flex-grow: 1;
     padding: 20px;
+    width: 88%;
     display: flex;
     flex-direction: column;
   }
@@ -36,34 +32,5 @@
     h2 {
       margin-bottom: 1rem;
     }
-
-    .p-datatable {
-      flex-grow: 1;
-
-      .p-datatable-wrapper {
-        height: 100%;
-      }
-
-      .p-datatable-table {
-        height: 100%;
-      }
-    }
   }
-}
-
-// If you're using a layout component, make sure it allows the admin-dashboard to take full height
-:host {
-  display: flex;
-  flex-direction: column;
-  height: 100vh;
-}
-
-// Assuming you have header and footer components
-app-header, app-footer {
-  flex-shrink: 0;
-}
-
-// Your main content area should grow to fill available space
-main {
-  flex-grow: 1;
 }

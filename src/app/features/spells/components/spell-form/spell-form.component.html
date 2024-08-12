@@ -1,0 +1,115 @@
+<form [formGroup]="spellForm" (ngSubmit)="onSubmit()">
+  <p-card [header]="isEditMode ? 'Modifier un sort' : 'Créer un sort'">
+    <div class="grid">
+      <div class="col-12 md:col-6">
+        <label for="name">Nom</label>
+        <input id="name" type="text" pInputText formControlName="name" class="w-full">
+      </div>
+
+      <div class="col-12 md:col-6">
+      </div>
+
+      <div class="col-12 md:col-6">
+        <label for="school">École</label>
+        <p-dropdown id="school" [options]="schools()" formControlName="school" optionLabel="name" optionValue="name" class="w-full"></p-dropdown>
+      </div>
+
+      <div class="col-12 md:col-6">
+        <label for="schoolComplement">École (complément)</label>
+        <input id="schoolComplement" type="text" pInputText formControlName="schoolComplement" class="w-full">
+      </div>
+
+      <div class="col-12">
+        <label for="description">Description</label>
+        <textarea id="description" pInputTextarea formControlName="description" rows="5" class="w-full"></textarea>
+      </div>
+
+      <div class="col-12 md:col-6">
+        <label for="savingThrow">Jet de sauvegarde</label>
+        <input id="savingThrow" type="text" pInputText formControlName="savingThrow" class="w-full">
+      </div>
+
+      <div class="col-12 md:col-6">
+        <label for="components">Composantes</label>
+        <input id="components" type="text" pInputText formControlName="components" class="w-full">
+      </div>
+
+      <div class="col-12 md:col-6">
+        <label for="castingTime">Temps d'incantation</label>
+        <input id="castingTime" type="text" pInputText formControlName="castingTime" class="w-full">
+      </div>
+
+      <div class="col-12 md:col-6">
+        <label for="range">Portée</label>
+        <input id="range" type="text" pInputText formControlName="range" class="w-full">
+      </div>
+
+      <div class="col-12">
+        <label for="effect">Effet</label>
+        <textarea id="effect" pInputTextarea formControlName="effect" rows="3" class="w-full"></textarea>
+      </div>
+
+      <div class="col-12 md:col-6">
+        <label for="duration">Durée</label>
+        <input id="duration" type="text" pInputText formControlName="duration" class="w-full">
+      </div>
+
+      <div class="col-12 md:col-6">
+        <label for="spellResistance">Résistance à la magie</label>
+        <input id="spellResistance" type="text" pInputText formControlName="spellResistance" class="w-full">
+      </div>
+
+      <div class="col-12 md:col-6">
+        <label for="targets">Cible</label>
+        <input id="targets" type="text" pInputText formControlName="targets" class="w-full">
+      </div>
+
+      <div class="col-12 md:col-6">
+      </div>
+
+      <div class="col-12 md:col-6">
+        <label for="ruleBookId">Livre source</label>
+        <p-dropdown id="ruleBookId" [options]="ruleBooks()" formControlName="ruleBookId" optionLabel="name" optionValue="id" class="w-full"></p-dropdown>
+      </div>
+
+      <div class="col-12 md:col-6">
+        <label for="page">Page</label>
+        <p-inputNumber id="page" formControlName="page" [min]="1" class="w-full"></p-inputNumber>
+      </div>
+
+      <div class="col-12">
+        <label>Niveaux (classes) : </label>
+        <div formArrayName="classLevels">
+          @for (classLevel of classLevelsArray.controls; track $index) {
+            <div [formGroupName]="$index" class="flex align-items-center mb-2">
+              <p-dropdown formControlName="id" [options]="classes()" optionLabel="name" optionValue="id" class="mr-2" placeholder="Sélectionner une classe"></p-dropdown>
+              <p-dropdown formControlName="level" [options]="levelOptions" class="mr-2"></p-dropdown>
+              <p-button icon="pi pi-minus" (onClick)="removeClassLevel($index)" styleClass="p-button-danger p-button-outlined"></p-button>
+            </div>
+          }
+        </div>
+        <p-button icon="pi pi-plus" (onClick)="addClassLevel()" label="Ajouter une classe" styleClass="p-button-outlined mt-2"></p-button>
+      </div>
+
+      <div class="col-12">
+        <label>Niveaux (domaines) : </label>
+        <div formArrayName="domainLevels">
+          @for (domainLevel of domainLevelsArray.controls; track $index) {
+            <div [formGroupName]="$index" class="flex align-items-center mb-2">
+              <p-dropdown formControlName="id" [options]="domains()" optionLabel="name" optionValue="id" class="mr-2" placeholder="Sélectionner un domaine"></p-dropdown>
+              <p-dropdown formControlName="level" [options]="levelOptions" class="mr-2"></p-dropdown>
+              <p-button icon="pi pi-minus" (onClick)="removeDomainLevel($index)" styleClass="p-button-danger p-button-outlined"></p-button>
+            </div>
+          }
+        </div>
+        <p-button icon="pi pi-plus" (onClick)="addDomainLevel()" label="Ajouter un domaine" styleClass="p-button-outlined mt-2"></p-button>
+      </div>
+
+    </div>
+
+    <div class="flex justify-content-end mt-4">
+      <p-button type="button" label="Cancel" (onClick)="cancel()" class="p-button-secondary mr-2"></p-button>
+      <p-button type="submit" label="Save" [disabled]="spellForm.invalid"></p-button>
+    </div>
+  </p-card>
+</form>

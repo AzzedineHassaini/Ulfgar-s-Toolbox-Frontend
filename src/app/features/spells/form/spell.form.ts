@@ -13,26 +13,26 @@ export interface ISpellForm {
   range: string;
   effect?: string;
   duration: string;
-  magicResistance?: string;
+  spellResistance?: string;
   targets?: string;
   ruleBookId: number;
   page: number;
 }
 
 export const SPELL_FORM = {
-  'classLevels': [{}, [Validators.required]],
-  'domainLevels': [{}, [Validators.required]],
-  'name': ['', [Validators.required, Validators.minLength(3)]],
+  'classLevels': [{}],
+  'domainLevels': [{}],
+  'name': ['', [Validators.required]],
   'school': ['', [Validators.required]],
   'schoolComplement': [''],
-  'description': ['', [Validators.required, Validators.minLength(10)]],
+  'description': ['', [Validators.required]],
   'savingThrow': [''],
   'components': ['', [Validators.required]],
-  'castingTime': ['', [Validators.required]],
+  'castingTime': [''],
   'range': ['', [Validators.required]],
   'effect': [''],
   'duration': ['', [Validators.required]],
-  'magicResistance': [''],
+  'spellResistance': [''],
   'targets': [''],
   'ruleBookId': [null, [Validators.required, Validators.min(1)]],
   'page': [null, [Validators.required, Validators.min(1)]]

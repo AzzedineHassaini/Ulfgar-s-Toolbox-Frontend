@@ -6,10 +6,9 @@ import {SpellListComponent} from "./features/spells/components/spell-list/spell-
 import {SpellDetailComponent} from "./features/spells/components/spell-detail/spell-detail.component";
 import {adminGuard} from "./shared/guards/admin.guard";
 import {authGuard} from "./shared/guards/auth.guard";
-import {SpellEditComponent} from "./features/spells/components/spell-edit/spell-edit.component";
-import {SpellAddComponent} from "./features/spells/components/spell-add/spell-add.component";
 import {AdminDashboardComponent} from "./features/admin/components/admin-dashboard/admin-dashboard.component";
 import {contributorGuard} from "./shared/guards/contributor.guard";
+import {SpellFormComponent} from "./features/spells/components/spell-form/spell-form.component";
 
 export const routes: Routes = [
   {
@@ -41,17 +40,17 @@ export const routes: Routes = [
     component: SpellListComponent
   },
   {
-    path: 'spells/:id',
+    path: 'spells/details/:id',
     component: SpellDetailComponent
   },
   {
     path: 'spells/edit/:id',
-    component: SpellEditComponent,
+    component: SpellFormComponent,
     canActivate: [contributorGuard]
   },
   {
     path: 'spells/add',
-    component: SpellAddComponent,
+    component: SpellFormComponent,
     canActivate: [contributorGuard]
   }
 ];

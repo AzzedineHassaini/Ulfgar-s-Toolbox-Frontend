@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import {environment} from "../../../../environments/environment";
-import {PagedSpells, SpellDetails} from "../models/spell.model";
+import {PagedSpells, SpellDetails, SpellDetailsForm} from "../models/spell.model";
 import {ISpellForm} from "../form/spell.form";
 
 @Injectable({
@@ -29,6 +29,10 @@ export class SpellService {
 
   getSpellDetails(id: number): Observable<SpellDetails> {
     return this.http.get<SpellDetails>(`${this.apiUrl}/${id}`);
+  }
+
+  getSpellDetailsForm(id: number): Observable<SpellDetailsForm> {
+    return this.http.get<SpellDetailsForm>(`${this.apiUrl}/form/${id}`);
   }
 
   addSpell(spell: ISpellForm): Observable<SpellDetails> {

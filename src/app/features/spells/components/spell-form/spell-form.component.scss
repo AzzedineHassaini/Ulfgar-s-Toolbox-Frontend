@@ -1,0 +1,12 @@
+// Styles pour p-multiselect et p-dropdown
+p-multiselect, p-dropdown {
+  display: block;
+  width: 100%;
+
+  ::ng-deep {
+    .p-multiselect, .p-dropdown {
+      width: 100%;
+      height: 46px;
+    }
+  }
+}

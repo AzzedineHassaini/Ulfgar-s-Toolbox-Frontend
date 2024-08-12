@@ -25,7 +25,7 @@
               <td>{{user.pseudo}}</td>
               <td>
                 <p-dropdown [options]="[{label: 'User', value: 'USER'},{label: 'Contributor', value: 'CONTRIBUTOR'}, {label: 'Admin', value: 'ADMIN'}]"
-                            [(ngModel)]="user.role" (onChange)="updateUserRole(user, user.role)"></p-dropdown>
+                            [(ngModel)]="user.role" (onChange)="updateUserRole(user, user.role)" appendTo="body"></p-dropdown>
 <!--                <app-role-selector [currentRole]="user.role" (roleChanged)="updateUserRole(user, $event)"></app-role-selector>-->
               </td>
               <td>
@@ -42,17 +42,18 @@
         <h2>Spell History</h2>
         <p-table [value]="spellHistory" [lazy]="true" (onLazyLoad)="loadSpellHistory($event)"
                  [paginator]="true" [rows]="20" [totalRecords]="totalRecords" [rowsPerPageOptions]="[20, 50, 100, 250]"
-                 [scrollable]="true" scrollHeight="flex" [sortField]="sortField" [sortOrder]="sortOrder">
+                 [resizableColumns]="true"
+                 styleClass="p-datatable-gridlines" >
           <ng-template pTemplate="header">
             <tr>
-              <th pSortableColumn="spellName">Spell Name <p-sortIcon field="spellName"></p-sortIcon></th>
-              <th pSortableColumn="action">Action <p-sortIcon field="action"></p-sortIcon></th>
-              <th pSortableColumn="updatedTable">Updated Table <p-sortIcon field="updatedTable"></p-sortIcon></th>
-              <th pSortableColumn="updatedField">Updated Field <p-sortIcon field="updatedField"></p-sortIcon></th>
-              <th pSortableColumn="oldValue">Old Value <p-sortIcon field="oldValue"></p-sortIcon></th>
-              <th pSortableColumn="newValue">New Value <p-sortIcon field="newValue"></p-sortIcon></th>
-              <th pSortableColumn="date">Date <p-sortIcon field="date"></p-sortIcon></th>
-              <th pSortableColumn="user">User <p-sortIcon field="user"></p-sortIcon></th>
+              <th>Spell Name</th>
+              <th>Action</th>
+              <th>Updated Table</th>
+              <th>Updated Field</th>
+              <th>Old Value</th>
+              <th>New Value</th>
+              <th>Date</th>
+              <th>User</th>
             </tr>
           </ng-template>
           <ng-template pTemplate="body" let-spell>
